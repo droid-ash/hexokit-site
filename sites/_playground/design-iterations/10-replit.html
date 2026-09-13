@@ -110,6 +110,8 @@ footer h5{margin:0 0 12px;font-size:14px;font-weight:600}
 footer a{display:block;line-height:28px;color:var(--body)}
 footer .bottom{max-width:1380px;margin:40px auto 0;font-size:13px;color:var(--muted)}
 @media(max-width:900px){footer .in{grid-template-columns:1fr 1fr}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:26px;color:var(--fg);margin:22px 0 0;letter-spacing:-.3px}
 </style>
 </head>
 <body>
@@ -122,6 +124,7 @@ footer .bottom{max-width:1380px;margin:40px auto 0;font-size:13px;color:var(--mu
 <main class="wrap">
   <section class="hero">
     <h1>Your tmux, in the browser and on your phone.</h1>
+    <p class="subline">Cockpit for the agent era.</p>
     <p class="sub">Then tell the operator what to do next.</p>
     <div class="prompt">
       <div class="ph"><b>Start the next wave of tracked changes</b> and ping me if any review fails…</div>
@@ -141,7 +144,7 @@ footer .bottom{max-width:1380px;margin:40px auto 0;font-size:13px;color:var(--mu
   </section>
 
   <section class="bento">
-    <div class="bc peach"><div><h2>The agent plans before it builds</h2><p>fab-kit scores every assumption. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><a class="btn" href="#">How the gate works</a></div><pre class="mono">$ fab score --check-gate 7ajq
+    <div class="bc peach"><div><h2>The agent plans before it builds</h2><p>fab-kit scores every assumption. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><a class="btn" href="#">How the gate works</a></div><pre class="mono">$ fab score --check-gate 7ajq
 confidence 2.6 / 5.0 · gate 3.0
 <span class="bad">blocked</span> · 1 unresolved
 run /fab-clarify
@@ -149,7 +152,7 @@ run /fab-clarify
 $ fab score --check-gate 7ajq
 confidence 3.4 / 5.0 · gate 3.0
 <span class="ok">pass</span></pre></div>
-    <div class="bc green"><div><h2>One agent watches the others</h2><p>rk operator starts the next change, unblocks a stuck one, and pings your phone. Its console slides down over any tab.</p><a class="btn" href="#">Meet the operator</a></div><div class="vis"><img src="assets/hexokit-operator.webp" width="1080" height="675" alt="The operator popover reporting on tracked changes and asking whether to start the next wave."></div></div>
+    <div class="bc green"><div><h2>One agent watches the others</h2><p>rk riff -N 3 starts three agents in three worktrees. rk operator starts the next change, unblocks a stuck one, and pings your phone. Its console slides down over any tab.</p><a class="btn" href="#">Meet the operator</a></div><div class="vis"><img src="assets/hexokit-operator.webp" width="1080" height="675" alt="The operator popover reporting on tracked changes and asking whether to start the next wave."></div></div>
     <div class="bc sand"><div><h2>Steer it from your phone</h2><p>Serve it over Tailscale. Same panes, a key bar for tab, ctrl and arrows. Push arrives with the tab closed.</p><a class="btn" href="#">Set up Tailscale</a></div><figure class="phone" style="margin:0 0 -120px"><img src="assets/hexokit-phone-terminal.webp" width="800" height="1739" alt="A live tmux pane on a phone with a key bar."></figure></div>
     <div class="bc slate"><div><h2>Give the agent a screen</h2><p>rk gui on puts a desktop in a tile. The agent clicks, types and screenshots. You watch. Off by default.</p><a class="btn" href="#">Read the GUI guide</a></div><pre class="mono">$ rk gui on
 gui: on (:10, 1920x1080, icewm)
@@ -158,6 +161,8 @@ $ rk gui click 812 344
 $ rk gui type "hexokit.com/docs"
 $ rk gui shot --json
 {"ok":true,"path":"…/1132.png"}</pre></div>
+    <div class="bc sand"><div><h2>Three agents, one board</h2><p>Pin panes from any machine side by side. The same board on your phone.</p><a class="btn" href="#">Boards</a></div><div class="vis"><img src="assets/hexokit-board.webp" width="1400" height="875" alt="A HexoKit board: two pinned agent panes rendered side by side."></div></div>
+    <div class="bc green"><div><h2>Working, waiting, idle</h2><p>One dot per window says which. Claude Code, Codex, Gemini CLI and Copilot CLI report in after a one-time setup.</p><a class="btn" href="#">Agent hooks</a></div><div class="vis"><img src="assets/hexokit-agent-state.webp" width="1000" height="625" alt="The session sidebar with per-window status dots; the status bar reads agt idle 43s."></div></div>
   </section>
 
   <section class="tools">
@@ -173,7 +178,7 @@ $ rk gui shot --json
     </div>
   </section>
 
-  <div class="strip"><span>Claude Code</span><span>Codex</span><span>Gemini CLI</span><span>Copilot CLI</span><span>Kimi Code</span><span>OpenCode</span><span>Antigravity</span><small>Every harness reports working, waiting or idle. A pane is just as happily a build, a REPL, ssh, htop.</small></div>
+  <div class="strip"><span>Claude Code</span><span>Codex</span><span>Gemini CLI</span><span>Copilot CLI</span><span>Kimi Code</span><span>OpenCode</span><span>Antigravity</span><small>Every harness reports working, waiting or idle. A pane is just as happily a build, a REPL, ssh, htop. HexoKit never wraps the agent.</small></div>
 
   <section class="install" id="install">
     <div><h2>One line, then you are in.</h2><p>Needs tmux 3.4 or newer. Run rk doctor if anything looks wrong. MIT, all seven repos.</p><a class="btn" href="#">Install HexoKit</a></div>

@@ -120,6 +120,8 @@ footer h5{margin:0 0 14px;font-size:13px;color:var(--muted);font-weight:500}
 footer a{display:block;line-height:2}
 footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 @media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:1.3;font-weight:500;margin:18px 0 0;color:var(--dim);text-shadow:none}.harn{margin:20px 0 0;font-size:14px;line-height:1.5;color:var(--muted);max-width:640px}
 </style>
 </head>
 <body>
@@ -132,6 +134,7 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
 <section class="hero">
   <div class="streaks"></div>
   <h1>Your tmux, in the browser and on your phone.</h1>
+  <p class="subline">Cockpit for the agent era.</p>
   <p>Every session and pane as a live terminal, in a sidebar, from your desk or your couch. ⌘K finds everything. Nothing to configure, no database.</p>
   <a class="btn dl" href="#install">⌘ Install for Mac and Linux</a>
   <div class="cap">tmux 3.4 or newer required<br><a href="#">Install via Homebrew</a> &nbsp;|&nbsp; <a href="#">curl hexokit.com/install</a></div>
@@ -171,17 +174,18 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
   </section>
 
   <section class="sec">
-    <h2>It's not about watching agents. <span>It's about knowing which one needs you. One dot per window, one coordinator for the fleet, one push to your phone.</span></h2>
+    <h2>It's not about watching agents. <span>It's about knowing which one needs you. One dot per window, one coordinator for the fleet, one push to your phone. HexoKit never wraps the agent; a pane is just a pane.</span></h2>
+    <p class="harn">Agent state reports in from Claude Code, Codex, Gemini CLI, Copilot CLI, Kimi Code, OpenCode and Antigravity after a one-time <code>shll setup agent</code>.</p>
     <div class="two">
-      <div class="gl"><h4>One agent watches the others</h4><p>rk operator opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone. One shortcut and its console slides down over any tab.</p><img src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down as a drawer over a dashboard tab."></div>
-      <div class="gl"><h4>The agent plans before it builds</h4><p>fab-kit scores every assumption the agent made. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><pre class="mono">$ fab score --check-gate 7ajq
+      <div class="gl"><h4>One agent watches the others</h4><p>rk riff -N 3 starts three agents in three worktrees. rk operator opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone. One shortcut and its console slides down over any tab.</p><img src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down as a drawer over a dashboard tab."></div>
+      <div class="gl"><h4>The agent plans before it builds</h4><p>fab-kit scores every assumption the agent made. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><pre class="mono">$ fab score --check-gate 7ajq
 confidence 2.6 / 5.0 · gate 3.0 · <span class="bad">blocked</span>
   1 unresolved · run /fab-clarify
 
 $ fab score --check-gate 7ajq
 confidence 3.4 / 5.0 · gate 3.0 · <span class="ok">pass</span></pre></div>
       <div class="gl"><h4>Three agents and the dev server, side by side</h4><p>Pin panes from any machine into a board. Same board on your phone.</p><img src="assets/hexokit-board.webp" width="1400" height="875" alt="A board with two pinned agent panes side by side."></div>
-      <div class="gl"><h4>Steer it from your phone</h4><p>Serve it over Tailscale. A key bar for tab, ctrl and arrows. Push arrives with the tab closed.</p><pre class="mono">$ tailscale serve --bg http://localhost:3000
+      <div class="gl"><h4>Steer it from your phone</h4><p>Serve it over Tailscale. A key bar for tab, ctrl and arrows. Push arrives with the tab closed.</p><figure style="margin:16px auto 0;width:170px;border-radius:24px;border:6px solid #111;overflow:hidden"><img src="assets/hexokit-phone-terminal.webp" width="800" height="1739" alt="A live tmux pane on a phone with an on-screen key bar for tab, ctrl and arrow keys."></figure><pre class="mono">$ tailscale serve --bg http://localhost:3000
 → https://dev-ws.tail1a2b.ts.net
 $ rk notify "review failed on 7ajq" --title fab</pre></div>
     </div>

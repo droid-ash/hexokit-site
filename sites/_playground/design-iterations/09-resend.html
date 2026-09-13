@@ -101,6 +101,8 @@ footer a:hover{color:var(--fg)}
 @media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 pre{max-width:100%;overflow-x:auto}.fc,.fc .vis{min-width:0}@media(max-width:900px){.hero,.two{grid-template-columns:minmax(0,1fr)}.tools{grid-template-columns:minmax(0,1fr)}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:28px;color:var(--fg);font-weight:500;margin:20px 0 0;max-width:none}
 </style>
 </head>
 <body>
@@ -115,6 +117,7 @@ pre{max-width:100%;overflow-x:auto}.fc,.fc .vis{min-width:0}@media(max-width:900
     <div>
       <a class="ann" href="#">The operator's console now drops in from any tab</a>
       <h1 class="serif">Your tmux, in the browser and on your phone.</h1>
+      <p class="subline">Cockpit for the agent era.</p>
       <p>Every session and pane as a live terminal, at your desk or on the couch. Nothing to configure, no database. State read straight from tmux.</p>
       <div class="ctas"><a class="btn lg" href="#install">Install</a><a class="btn lg ghost" href="#">Documentation</a></div>
     </div>
@@ -143,7 +146,7 @@ $ rk riff --skill <span class="k">/fab-fff</span>
     <h2>First-class agent experience</h2>
     <p class="lead">Mostly what runs in those panes is coding agents, several at once. HexoKit never wraps them. It just makes them visible, and keeps them in check.</p>
     <div class="two">
-      <div class="fc"><div class="vis"><img src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down over a dashboard tab, reporting a merged PR."></div><h3>One agent watches the others</h3><p>rk operator opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone. One shortcut and its console slides down over any tab.</p></div>
+      <div class="fc"><div class="vis"><img src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down over a dashboard tab, reporting a merged PR."></div><h3>One agent watches the others</h3><p>rk riff -N 3 starts three agents in three worktrees. rk operator opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone. One shortcut and its console slides down over any tab.</p></div>
       <div class="fc"><div class="vis"><pre class="mono"><span class="c">## Assumptions</span>
 1  Certain     use the existing test runner      <span class="c">S:50 R:95 A:100 D:100</span>
 2  Confident   JSON error envelope               <span class="c">S:55 R:80 A:85 D:90</span>
@@ -153,7 +156,7 @@ $ rk riff --skill <span class="k">/fab-fff</span>
 $ fab score --check-gate 7ajq
 confidence 2.6 / 5.0 · gate 3.0 · <span class="bad">blocked</span> · run /fab-clarify
 $ fab score --check-gate 7ajq
-confidence 3.4 / 5.0 · gate 3.0 · <span class="ok">pass</span></pre></div><h3>The agent plans before it builds</h3><p>fab-kit scores every assumption the agent made. Under 3.0 the gate closes and the pipeline tells you what to clarify. One risky guess stays visible; it is never averaged away.</p></div>
+confidence 3.4 / 5.0 · gate 3.0 · <span class="ok">pass</span></pre></div><h3>The agent plans before it builds</h3><p>fab-kit scores every assumption the agent made. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify. One risky guess stays visible; it is never averaged away.</p></div>
       <div class="fc"><div class="vis"><img src="assets/hexokit-board.webp" width="1400" height="875" alt="A board: two pinned agent panes side by side."></div><h3>Three agents and the dev server, side by side</h3><p>Pin panes from any machine into a board. One dot per window says working, waiting or idle. The same board on your phone.</p></div>
       <div class="fc"><div class="vis"><pre class="mono">$ rk gui on
 gui: on (Xtigervnc, :10, 1920x1080, icewm-session)

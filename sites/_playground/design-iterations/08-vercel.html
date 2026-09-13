@@ -122,6 +122,8 @@ footer a:hover{color:var(--fg)}
 @media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr;padding:32px 24px}}
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 pre{max-width:100%;overflow-x:auto}.trip > div,.frames > *,.sec > *,.facts > div{min-width:0}@media(max-width:1000px){.hero{grid-template-columns:minmax(0,1fr)}}@media(max-width:900px){.trip,.frames,.frames.one,.sec,.facts{grid-template-columns:minmax(0,1fr)}.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.phones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:28px;color:var(--muted);margin:20px 0 0;letter-spacing:-.2px}
 </style>
 </head>
 <body>
@@ -136,6 +138,7 @@ pre{max-width:100%;overflow-x:auto}.trip > div,.frames > *,.sec > *,.facts > div
   <section class="hero">
     <div>
       <h1>Your tmux, in the browser and on your phone.</h1>
+      <p class="subline">Cockpit for the agent era.</p>
       <div class="ctas"><a class="pill light" href="#install">Install now</a><a class="pill dark" href="#">Read the docs</a></div>
     </div>
     <div class="hex"><svg viewBox="0 0 200 220" fill="none"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".9"/><stop offset="1" stop-color="currentColor" stop-opacity=".1"/></linearGradient></defs><path d="M100 10l86 50v100l-86 50-86-50V60z" stroke="url(#g)" stroke-width="2"/><path d="M100 10l86 50v100l-86 50-86-50V60z" fill="var(--bg)"/><path d="M100 210V110M14 60l86 50 86-50" stroke="url(#g)" stroke-width="1.5"/></svg></div>
@@ -144,7 +147,7 @@ pre{max-width:100%;overflow-x:auto}.trip > div,.frames > *,.sec > *,.facts > div
   <div class="logos"><div>Claude Code</div><div>Codex</div><div>Gemini CLI</div><div>Copilot CLI</div><div>Kimi Code</div><div>OpenCode</div><div>Antigravity</div></div>
 
   <section class="trip">
-    <div><div class="lbl">01 · PLAN</div><h3>A plan before any code.</h3><p>fab-kit puts an intake stage in front of every change. The agent scores each assumption. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p>
+    <div><div class="lbl">01 · PLAN</div><h3>A plan before any code.</h3><p>fab-kit puts an intake stage in front of every change. The agent scores each assumption. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p>
       <div class="frame"><div class="bar"><i></i><i></i><i></i>fab score</div><pre class="mono">$ fab score --check-gate 7ajq
 confidence 2.6 / 5.0 · gate 3.0
 <span class="bad">blocked</span> — 1 unresolved

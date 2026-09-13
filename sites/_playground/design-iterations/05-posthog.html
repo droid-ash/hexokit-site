@@ -125,6 +125,8 @@ h1 mark{background:var(--hl2);color:var(--fg);padding:2px 6px;border-radius:3px;
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 .inner,.mw,.mw .b,.panel > *{min-width:0}.mw pre,.setup pre{max-width:100%;overflow-x:auto}@media(max-width:900px){.panel{grid-template-columns:minmax(0,1fr)}.hero{grid-template-columns:minmax(0,1fr)}}@media(max-width:560px){.mw .b{grid-template-columns:minmax(0,1fr)!important}.setup .row{grid-template-columns:1fr}}
 .wfoot > div{display:flex;flex-wrap:wrap;gap:8px 16px;min-width:0}.wfoot a{margin-right:0}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:28px;font-weight:700;margin:12px 0 0;color:var(--body)}.harn{margin:20px 0 0;font-size:14px;line-height:20px;color:var(--muted);text-align:center}
 </style>
 </head>
 <body>
@@ -160,8 +162,9 @@ h1 mark{background:var(--hl2);color:var(--fg);padding:2px 6px;border-radius:3px;
     <section class="hero">
       <div>
         <h1>Your tmux, in the browser <mark>and on your phone.</mark></h1>
+        <p class="subline">Cockpit for the agent era.</p>
         <p>HexoKit already shows <mark>every pane</mark> as a live terminal. Now the agent gets <u>a desktop of its own</u>, in a tile beside your terminals, and you watch it from the couch.</p>
-        <p class="join">MIT. Seven repos. Zero databases.</p>
+        <p class="join">MIT. Seven repos. Zero databases. Never wraps the agent.</p>
       </div>
       <div class="setup">
         <h3>Set up <mark>in one line</mark></h3>
@@ -186,10 +189,11 @@ h1 mark{background:var(--hl2);color:var(--fg);padding:2px 6px;border-radius:3px;
         <a class="cta" href="#">Read the GUI guide</a>
       </div>
     </section>
+    <p class="harn">Agent state reports in from Claude Code, Codex, Gemini CLI, Copilot CLI, Kimi Code, OpenCode and Antigravity after a one-time <code>shll setup agent</code>.</p>
 
     <section class="mini">
-      <div class="mw"><div class="t"><i></i><i></i><i></i>OPERATOR · runKit idle 56m</div><div class="b"><h3>One agent watches the others</h3><p><code>rk operator</code> opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone.</p><img src="assets/hexokit-operator.webp" width="1080" height="675" alt="The operator popover reporting on tracked changes and asking whether to start the next wave." style="border-radius:6px;border:1px solid var(--border)"></div></div>
-      <div class="mw"><div class="t"><i></i><i></i><i></i>intake.md · fab score</div><div class="b"><h3>The agent plans before it builds</h3><p>fab-kit scores every assumption. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><pre class="mono">$ fab score --check-gate 7ajq
+      <div class="mw"><div class="t"><i></i><i></i><i></i>OPERATOR · runKit idle 56m</div><div class="b"><h3>One agent watches the others</h3><p><code>rk riff -N 3</code> starts three agents in three worktrees. <code>rk operator</code> opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone. One shortcut and its console slides down over any tab.</p><img src="assets/hexokit-operator.webp" width="1080" height="675" alt="The operator popover reporting on tracked changes and asking whether to start the next wave." style="border-radius:6px;border:1px solid var(--border)"></div></div>
+      <div class="mw"><div class="t"><i></i><i></i><i></i>intake.md · fab score</div><div class="b"><h3>The agent plans before it builds</h3><p>fab-kit scores every assumption. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><pre class="mono">$ fab score --check-gate 7ajq
 confidence 2.6 / 5.0 · gate 3.0 · <span class="bad">blocked</span>
   1 unresolved · run /fab-clarify
 $ fab score --check-gate 7ajq

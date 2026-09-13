@@ -125,6 +125,8 @@ footer a{display:block;line-height:30px;color:var(--muted)}
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 .frame pre{max-width:100%}.two > *,.frame{min-width:0}@media(max-width:900px){.nav .right .chip,.nav .right .glass{display:none}.hero,.two{grid-template-columns:minmax(0,1fr)}.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.logos{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:900px){.close{padding:40px 20px}.close pre{display:block;max-width:100%;overflow:auto;width:fit-content;margin-left:auto;margin-right:auto}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:28px;color:var(--fg);font-weight:400;margin:16px 0 0;max-width:none}
 </style>
 </head>
 <body>
@@ -141,6 +143,7 @@ footer a{display:block;line-height:30px;color:var(--muted)}
   <section class="hero">
     <div>
       <h1>Your tmux, in the browser and on your phone.</h1>
+      <p class="subline">Cockpit for the agent era.</p>
       <div class="ctas"><a class="btn fill" href="#install">Install for free</a><a class="btn glass" href="#">Read the docs</a></div>
       <p>Every agent you run, visible in one sidebar and steerable from anywhere. Every step of a change traceable on the pipeline. Nothing wrapped, nothing to configure, no database.</p>
     </div>
@@ -183,6 +186,7 @@ footer a{display:block;line-height:30px;color:var(--muted)}
       <div class="info"><i></i><div><b>Control every agent</b><span>rk operator request hands it templated work.</span></div></div>
       <div class="info"><i></i><div><b>Run it where you work</b><span>Your machine, your tailnet. No cloud, no database.</span></div></div>
     </div>
+    <figure class="frame" style="margin:24px 0 0"><div class="bar"><i></i><i></i><i></i>riff-amber-tern · OPERATOR · one shortcut, over any tab</div><img src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down as a drawer over a dashboard tab, reporting a merged PR and the next wave of work."></figure>
   </section>
 
   <section class="sec narrow">

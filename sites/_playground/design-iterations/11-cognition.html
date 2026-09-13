@@ -100,6 +100,8 @@ footer a:hover{color:var(--fg)}
 @media(max-width:900px){footer{grid-template-columns:1fr 1fr}}
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 pre.term{max-width:100%}.content,.content > section{min-width:0}@media(max-width:1200px){.layout{grid-template-columns:minmax(0,1fr)}}@media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.tools{grid-template-columns:minmax(0,1fr)}footer{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.content p.mark.sans{font-size:15px;margin:-18px 0 30px}@media(max-width:700px){.panel[style]{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -116,6 +118,7 @@ pre.term{max-width:100%}.content,.content > section{min-width:0}@media(max-width
     <main class="content">
       <section>
         <h1>HexoKit is a console for your tmux, and a layer above the agent you already use.</h1>
+        <p class="mark sans">Cockpit for the agent era.</p>
         <p>Your tmux, in the browser and on your phone. Every session and pane is a live terminal, in a sidebar, from your desk or your couch. It is the modern, terminal-native answer to the old server web-console: nothing to configure, no database, state read straight from tmux.</p>
         <p>What makes it so good right now is what tends to run in those panes: coding agents, many at once. <u>HexoKit never wraps the agent.</u> A pane is just a pane. It is equally a build, a REPL, an ssh session, <code>htop</code>. The agent is one of the things you run, not the thing HexoKit is. When the agent tooling churns underneath you, and it does, monthly, the terminal layer stays put.</p>
         <p>It is not another coding agent, and it does not want to be. The coding agent writes the code; HexoKit handles everything around it. Capturing the idea, writing the plan, isolating the work, watching the session, and pinging your phone when the agent is waiting on you.</p>
@@ -145,8 +148,13 @@ confidence 3.4 / 5.0 · gate 3.0 · <span class="ok">pass</span></pre>
 
       <section>
         <h2>One agent watches the others</h2>
-        <p><code>rk operator</code> opens a coordinator you talk to. It watches the fleet, starts the next change, unblocks a stuck one, and escalates to your phone when something needs you. One shortcut and its console slides down over whatever you are looking at. Your pane never moves. Pin three agents and the dev server into a board; one dot per window says working, waiting or idle.</p>
-        <p>Serve the dashboard over Tailscale and the same board is on your phone, with a key bar for tab, ctrl and arrows. Switch on <code>rk gui</code> and the agent gets a desktop of its own in a tile beside your terminals: it opens apps, clicks, types and takes screenshots, and you watch. Off by default, and yours to switch off.</p>
+        <p><code>rk operator</code> opens a coordinator you talk to. It watches the fleet, starts the next change, unblocks a stuck one, and escalates to your phone when something needs you. <code>rk riff -N 3</code> gives three agents three worktrees and three windows with one command. One shortcut and its console slides down over whatever you are looking at. Your pane never moves. Pin three agents and the dev server into a board; one dot per window says working, waiting or idle.</p>
+        <p>Serve the dashboard over Tailscale and the same board is on your phone, with a key bar for tab, ctrl and arrows. Switch on <code>rk gui</code> and the agent gets a desktop of its own in a tile beside your terminals: it opens apps, clicks, types and takes screenshots through <code>rk gui exec</code>, <code>shot</code>, <code>click</code> and <code>type</code>, and you watch. Off by default, and yours to switch off.</p>
+      </section>
+
+      <section>
+        <div class="panel" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)"><div style="background:var(--panel)"><img style="height:100%;object-fit:cover" src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down as a drawer over a dashboard tab, reporting a merged PR and the next wave of work."></div><div style="background:var(--panel)"><img style="height:100%;object-fit:cover" src="assets/hexokit-board.webp" width="1400" height="875" alt="A HexoKit board: two pinned agent panes rendered side by side."></div></div>
+        <div class="panel"><div class="cap"><span>rk operator · the console slides down over any tab</span><span>a board · three agents side by side</span></div></div>
       </section>
 
       <section>

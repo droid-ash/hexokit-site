@@ -154,6 +154,8 @@ footer .bottom{max-width:1240px;margin:36px auto 0;font:400 11px/16px "JetBrains
 @media(max-width:900px){footer .in{grid-template-columns:1fr 1fr}}
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 pre{max-width:100%;overflow-x:auto}.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}@media(max-width:1280px){.shell{grid-template-columns:minmax(0,1fr)}.col,.wide{min-width:0}}@media(max-width:900px){.two{grid-template-columns:minmax(0,1fr)}.cmp th{width:auto}.step{grid-template-columns:minmax(0,1fr)}.steps,.facts,.cards{min-width:0}.facts{grid-template-columns:minmax(0,1fr)}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font:500 20px/28px "Space Grotesk",Inter,sans-serif;color:var(--fg);margin:18px auto 0;max-width:none}
 </style>
 </head>
 <body>
@@ -175,6 +177,7 @@ pre{max-width:100%;overflow-x:auto}.two{grid-template-columns:minmax(0,1fr) minm
     <section class="hero">
       <div class="chips"><span class="chip"><i></i>MIT · all seven repos</span><span class="chip">no database</span><span class="chip">7 harnesses report state</span></div>
       <h1 class="display">Your tmux, in the <mark>browser</mark> and on your <mark>phone.</mark></h1>
+      <p class="subline">Cockpit for the agent era.</p>
       <p>A remote console for the machine you actually work on. Every tmux session and pane is a live terminal, at your desk or on the couch. Nothing to configure, and state is read straight from tmux.</p>
       <div class="ctas"><a class="btn primary" href="#install">Install <kbd>I</kbd></a><a class="btn" href="#">Documentation <kbd>D</kbd></a><a class="btn" href="#"><kbd>T</kbd> rk tutorial</a></div>
       <div class="logos"><span>Claude Code</span><span>Codex</span><span>Gemini CLI</span><span>Copilot CLI</span><span>Kimi Code</span><span>OpenCode</span><span>Antigravity</span><small>every harness reports working · waiting · idle</small></div>
@@ -185,6 +188,7 @@ pre{max-width:100%;overflow-x:auto}.two{grid-template-columns:minmax(0,1fr) minm
       <nav class="tabs"><a class="on" href="#">Sessions</a><a href="#">Boards</a><a href="#">Operator</a><a href="#">Agent state</a><a href="#">Phone</a><a href="#">GUI</a></nav>
       <figure class="frame"><span class="cm"></span><img src="assets/hexokit-hero-desktop.webp" width="2400" height="1506" alt="The HexoKit desktop app: a sidebar of tmux sessions beside two live agent panes."><div class="cap"><span>dev-ws-sahil02 · 3 servers · 23 windows</span><span>state read from tmux, 0 rows in any database</span></div></figure>
     </div>
+    <div class="wide" style="margin-top:20px"><div class="two" style="margin-top:0"><figure class="frame" style="margin:0"><span class="cm"></span><img src="assets/hexokit-operator-console.webp" width="1600" height="726" alt="The operator console slid down as a drawer over a dashboard tab, reporting a merged PR and the next wave of work."><div class="cap"><span>rk operator · the console over any tab</span><span>one shortcut, slides down, your pane never moves</span></div></figure><figure class="frame" style="margin:0"><span class="cm"></span><img src="assets/hexokit-board.webp" width="1400" height="875" alt="A HexoKit board: two pinned agent panes rendered side by side."><div class="cap"><span>board · agents</span><span>rk riff -N 3 · the same board on your phone</span></div></figure></div></div>
 
     <section class="sec" id="observe">
       <h2 class="display">Plan, build, review — <mark>repeat.</mark></h2>
@@ -234,6 +238,15 @@ confidence 3.4 / 5.0 · gate 3.0 · <span style="color:var(--ok)">pass</span></p
         <div class="fact"><h4>Made for agents too</h4><ul><li><code>rk skill</code> prints the briefing an agent reads</li><li><code>rk mcp</code> exposes the verbs to chat clients</li><li><code>rk present</code> shows an agent's HTML in a tile</li></ul><pre class="mono">$ rk notify "review failed on 7ajq" --title fab</pre></div>
         <div class="fact"><h4>MIT, all seven repos</h4><ul><li>run-kit · fab-kit · wt · idea · tu · hop · shll</li><li>brew tap, one install line</li><li>issues and Discord, no sales call</li></ul></div>
       </div>
+    </section>
+
+    <section class="sec">
+      <h2 class="display">From your <mark>phone,</mark> over your own network.</h2>
+      <p class="lead">Serve the dashboard over Tailscale and open it on your phone. Same sessions, same boards, same panes. A key bar for tab, ctrl and arrows. Push arrives with the tab closed, and nothing leaves your tailnet.</p>
+      <div class="two"><div style="display:flex;gap:16px;justify-content:center;align-items:flex-start"><figure style="margin:0;width:44%;border-radius:22px;border:6px solid #111;overflow:hidden"><img src="assets/hexokit-hero-phone.webp" width="800" height="1739" alt="HexoKit on an iPhone: the session sidebar with boards, servers and per-pane status."></figure><figure style="margin:0;width:44%;border-radius:22px;border:6px solid #111;overflow:hidden"><img src="assets/hexokit-phone-terminal.webp" width="800" height="1739" alt="A live tmux pane on a phone with an on-screen key bar for tab, ctrl and arrow keys."></figure></div><div class="fact"><h4>Three steps</h4><ul><li>enable HTTPS certificates in the Tailscale admin</li><li>serve the dashboard over your tailnet</li><li>open the ts.net address on your phone and tap a pane</li></ul><pre class="mono">$ sudo tailscale set --operator=$USER
+$ tailscale serve --bg http://localhost:3000
+→ https://dev-ws.tail1a2b.ts.net
+$ rk notify "review failed on 7ajq" --title fab</pre></div></div>
     </section>
 
     <section class="sec">

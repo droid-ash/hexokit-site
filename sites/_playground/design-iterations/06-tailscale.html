@@ -141,6 +141,8 @@ footer h6{margin:0 0 14px;font:500 11px/1 "JetBrains Mono",monospace;letter-spac
 footer a{display:block;line-height:30px}
 footer .bottom{max-width:1312px;margin:40px auto 0;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media(max-width:900px){footer .in{grid-template-columns:1fr 1fr}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:22px;line-height:30px;color:var(--fg);font-weight:500;margin:16px auto 0;max-width:none}.panel .ph{font-size:28px;line-height:34px;font-weight:500;letter-spacing:-.4px;margin:0 0 16px}@media(max-width:900px){.cols[style]{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -154,6 +156,7 @@ footer .bottom{max-width:1312px;margin:40px auto 0;font-size:12px;color:var(--mu
 <main class="wrap">
   <section class="hero">
     <h1>Your tmux, in the browser and on your phone.</h1>
+    <p class="subline">Cockpit for the agent era.</p>
     <p>A remote console for the machine you actually work on. Every tmux session and pane is a live terminal, at your desk or on the couch. Over your own network, nothing to configure, no database.</p>
     <div class="ctas"><a class="pill" href="#install">Start connecting your phone</a><a class="link" href="#">Read the docs</a></div>
     <div class="five">
@@ -222,6 +225,21 @@ $ tailscale serve --bg <span class="k">http://localhost:3000</span>
       <div><time>v3.19.42 · Sep 11</time><h4>GUI agent verbs</h4><p>rk gui windows, click, type, key, clipboard and lock. Agents drive the same display you watch.</p><a href="#">Release notes</a></div>
     </div>
   </section>
+
+  <section class="panel" style="margin-top:128px">
+    <div><h3 class="ph">The agent plans before it builds</h3>
+      <ul><li>fab-kit puts an intake stage in front of every change. No code until the plan clears.</li><li>Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there.</li><li>The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</li><li>Review runs in a fresh sub-agent and loops back up to three times.</li></ul>
+      <a class="pill" href="#">How the gate works</a></div>
+    <div class="gcard"><div class="hd"><i></i><i></i><i></i>fab score · 260913-7ajq</div><pre class="mono">$ fab score --check-gate 7ajq
+confidence 2.6 / 5.0 · gate 3.0 · <span class="bad">blocked</span>
+  1 unresolved: auth provider — run /fab-clarify
+$ fab score --check-gate 7ajq
+confidence 3.4 / 5.0 · gate 3.0 · <span class="ok">pass</span></pre></div>
+  </section>
+  <div class="cols" style="grid-template-columns:1fr 1fr">
+    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><h4>One agent watches the others</h4><p><code>rk riff -N 3</code> starts three agents in three worktrees with one command. <code>rk operator</code> opens a coordinator you talk to. It starts the next change, unblocks a stuck one, and pings your phone. One shortcut and its console slides down over any tab.</p></div>
+    <div><svg viewBox="0 0 24 24"><path d="M3 5h18v12H3zM9 21h6"/></svg><h4>Give the agent a screen</h4><p><code>rk gui on</code> puts a desktop in a tile beside your terminals. The agent drives it with <code>rk gui exec</code>, <code>shot</code>, <code>click</code> and <code>type</code>. You watch from the browser or your phone. Off by default, and yours to switch off.</p></div>
+  </div>
 
   <section class="tools">
     <div class="tgrid">

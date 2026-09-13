@@ -132,6 +132,8 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
 /* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
 @media(max-width:900px){.panel,.panel.flip{grid-template-columns:minmax(0,1fr)}.panel .shot,.panel .copy{min-width:0}.doc{overflow-x:auto}}pre,.term{max-width:100%;overflow-x:auto}
 @media(max-width:900px){.install{grid-template-columns:minmax(0,1fr)}.install > div{min-width:0}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .sub{margin:14px 0 0;font-size:17px;line-height:24px;color:var(--muted)}.agn{max-width:658px;color:var(--muted);font-size:16px;line-height:24px;margin:0}
 </style>
 </head>
 <body>
@@ -144,6 +146,7 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
 <main class="wrap">
   <section class="hero">
     <h1>Your tmux, in the browser and on your phone.</h1>
+    <p class="sub">Cockpit for the agent era.</p>
     <div class="ctas">
       <a class="btn primary" href="#install">Install for macOS ⤓</a>
       <a class="btn secondary" href="#">Read the docs →</a>
@@ -161,7 +164,7 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
 
   <section class="panel">
     <div class="copy">
-      <h3>One agent watches the others.<span>rk operator opens a coordinator you talk to. It watches the fleet, starts the next change, and pings your phone when it needs you.</span></h3>
+      <h3>One agent watches the others.<span>rk riff -N 3 starts three agents in three worktrees. rk operator opens a coordinator you talk to. It watches the fleet, starts the next change, and pings your phone when it needs you. One shortcut and its console slides down over any tab.</span></h3>
       <a class="more" href="#">Learn about the operator →</a>
     </div>
     <div class="shot">
@@ -171,7 +174,7 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
 
   <section class="panel flip">
     <div class="copy">
-      <h3>The agent plans before it builds.<span>fab-kit scores every assumption the agent made. Under 3.0 the gate closes and the pipeline tells you what to clarify.</span></h3>
+      <h3>The agent plans before it builds.<span>fab-kit scores every assumption the agent made. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</span></h3>
       <a class="more" href="#">How the confidence gate works →</a>
     </div>
     <div class="shot">
@@ -226,6 +229,8 @@ footer .bottom{margin-top:40px;font-size:13px;color:var(--muted);display:flex;ju
       <div class="card"><div><div class="name">shll<small>installs and updates the whole set.</small></div><p>Hooks and completions for every tool, once.</p></div><code>shll setup agent</code></div>
     </div>
   </section>
+
+  <section class="grid-sec"><h2>Use any agent, untouched.</h2><p class="agn">Mostly what runs in those panes is coding agents, several at once. HexoKit never wraps them. It reads no agent's output and speaks no agent's protocol. A pane is just as happily a build, a REPL, an ssh session, htop. When the agent tools change again, this layer stays put.</p></section>
 
   <section class="install" id="install">
     <div><h2>One line, then you are in.</h2><p>Needs tmux 3.4 or newer. Run <code>rk doctor</code> if anything looks wrong. MIT, all seven repos.</p></div>
