@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HexoKit — iteration 10 · Replit structure</title>
+<!--
+  ITERATION 10 — structure measured from replit.com (2026-09-13, 1440px).
+  Copied: warm paper rgb(246,245,244) on rgb(250,246,241) · text rgb(24,25,27), muted
+  rgb(115,118,127) · a neutral grotesk at 14px body · centred H1 64px/64 weight 400 −3.84px
+  ("What will you build?") · a tiny 14px sub-line · a PROMPT BOX as the hero object (650×85,
+  r20, 1px warm border with a soft glow, "+" attach and a round send button) · a row of five
+  48px r12 icon buttons with labels and prev/next arrows · "Try an example" chips (r6 grey) ·
+  80px sticky nav with 36px r6 links and a saturated r6 CTA · colourful r24 bento cards
+  (666×320, padding 40) in peach and dark green with 36px/36 −1.08px H2s · 1380px container.
+  Not copied: their orange, wordmark, Diatype, copy. Face: DM Sans (nearest free). Both themes.
+  Lead beat: 1 → second act: 3 (the operator as the thing you talk to — the prompt box is
+  literally `rk operator request`), then 4 (phone), 2, 5.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--root:#faf6f1;--bg:#f6f5f4;--fg:#18191b;--body:#37383c;--muted:#73767f;--chip:#f1f0ee;--line:#d4d1ce;--card:#fff;--accent:#d4a73a;--accentfg:#1b1408;--accentbd:#f1d9a1;--peach:#f2cfa2;--green:#2c3328;--sand:#e9e0cf;--slate:#2a3138;--ok:#2f7d4d;--bad:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--root:#161514;--bg:#1a1918;--fg:#f2f0ee;--body:#cfcbc6;--muted:#8e8a85;--chip:#262422;--line:#3a3734;--card:#221f1d;--accent:#d4a73a;--accentfg:#1b1408;--accentbd:#5a4a1e;--peach:#6b4a24;--green:#1f261c;--sand:#3a3426;--slate:#1c2228;--ok:#5fbf7f;--bad:#e06c5a}}
+:root[data-theme=dark]{--root:#161514;--bg:#1a1918;--fg:#f2f0ee;--body:#cfcbc6;--muted:#8e8a85;--chip:#262422;--line:#3a3734;--card:#221f1d;--accent:#d4a73a;--accentfg:#1b1408;--accentbd:#5a4a1e;--peach:#6b4a24;--green:#1f261c;--sand:#3a3426;--slate:#1c2228;--ok:#5fbf7f;--bad:#e06c5a}
+*{box-sizing:border-box}
+html{color-scheme:light dark;background:var(--root)}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.3 "DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.wrap{max-width:1380px;margin:0 auto;padding:0 30px}
+/* nav */
+.nav{position:sticky;top:0;z-index:10;height:80px;background:var(--root)}
+.nav .wrap{height:80px;display:flex;align-items:center;gap:8px}
+.mark{display:flex;align-items:center;gap:8px;font-weight:600;font-size:22px;letter-spacing:-.4px;margin-right:30px}
+.mark svg{width:24px;height:24px;color:var(--accent)}
+.nav .links a{display:inline-flex;align-items:center;height:36px;padding:0 11px;border-radius:6px;font-size:14px;color:var(--body)}
+.nav .links a::after{content:"⌄";margin-left:8px;color:var(--muted)}
+.nav .links a.p::after{content:""}
+.nav .right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.nav .right .txt{font-size:14px;color:var(--body);padding:0 8px}
+.btn{display:inline-flex;align-items:center;height:40px;padding:0 14px;border-radius:6px;font-size:14px;font-weight:500;background:var(--chip);color:var(--fg)}
+.btn.cta{background:var(--accent);color:var(--accentfg)}
+.theme{width:40px;height:40px;border-radius:6px;border:1px solid var(--line);background:var(--chip);color:var(--fg);cursor:pointer}
+@media(max-width:900px){.nav .links,.nav .right .txt{display:none}}
+/* hero */
+.hero{padding:270px 0 120px;text-align:center;position:relative}
+h1{font-size:64px;line-height:64px;letter-spacing:-3.84px;font-weight:400;margin:0 auto;max-width:900px}
+.hero .sub{font-size:14px;color:var(--body);margin:26px 0 0}
+.prompt{position:relative;margin:40px auto 0;width:min(650px,100%);height:85px;background:var(--card);border:1px solid var(--accentbd);border-radius:20px;box-shadow:0 0 0 8px rgba(212,167,58,.08),0 0 60px rgba(212,167,58,.18);text-align:left;padding:16px 18px}
+.prompt .ph{font-size:15px;color:var(--muted)}
+.prompt .ph b{color:var(--fg);font-weight:400}
+.prompt .plus{position:absolute;left:18px;bottom:12px;font-size:20px;color:var(--body);line-height:1}
+.prompt .send{position:absolute;right:14px;bottom:12px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accentfg);display:grid;place-items:center;font-size:16px}
+.prompt .cmd{position:absolute;right:56px;bottom:16px;font:400 11px/1 "JetBrains Mono",monospace;color:var(--muted)}
+.kinds{display:flex;gap:28px;justify-content:center;align-items:flex-start;margin-top:30px}
+.kinds a{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--body)}
+.kinds a i{width:48px;height:48px;border-radius:12px;background:var(--chip);border:1px solid var(--line);display:grid;place-items:center}
+.kinds a svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
+.kinds .arr{align-self:center;color:var(--muted);font-size:16px;margin-top:-20px}
+.try{margin-top:30px;font-size:13px;color:var(--muted)}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.chips span{background:var(--chip);border-radius:6px;padding:8px 12px;font-size:14px;color:var(--fg)}
+@media(max-width:900px){.hero{padding:120px 0 80px}h1{font-size:40px;line-height:42px;letter-spacing:-2px}.kinds{gap:12px;flex-wrap:wrap}.kinds .arr{display:none}}
+/* bento */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bc{border-radius:24px;padding:40px;min-height:320px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;overflow:hidden;position:relative}
+.bc h2{font-size:36px;line-height:36px;letter-spacing:-1.08px;font-weight:400;margin:0 0 14px}
+.bc p{margin:0;font-size:14px;line-height:18.2px;max-width:264px}
+.bc.peach{background:var(--peach);color:var(--fg)}
+.bc.green{background:var(--green);color:#fff}
+.bc.green p{color:rgba(255,255,255,.85)}
+.bc.sand{background:var(--sand);color:var(--fg)}
+.bc.slate{background:var(--slate);color:#fff}
+.bc.slate p{color:rgba(255,255,255,.85)}
+.bc .vis{justify-self:end;align-self:end;margin:-40px -40px -40px 0;width:110%;max-width:none}
+.bc .vis img{border-radius:12px 0 0 0;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.bc .phone{justify-self:center;width:180px;border-radius:26px;border:6px solid #111;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.3);margin-bottom:-120px}
+.bc pre{margin:0;justify-self:stretch;background:rgba(0,0,0,.35);color:#fff;border-radius:12px;padding:16px;font-size:12px;line-height:18px;overflow:hidden}
+.bc.peach pre{background:rgba(255,255,255,.7);color:var(--fg)}
+.ok{color:var(--ok)}.bad{color:#ff8a7a}.bc.peach .bad{color:var(--bad)}
+.bc .btn{margin-top:22px;background:rgba(255,255,255,.9);color:#18191b}
+@media(max-width:900px){.bento{grid-template-columns:1fr}.bc{grid-template-columns:1fr;padding:28px}.bc .vis{margin:0;width:100%}.bc .phone{margin-bottom:0}}
+/* tools row */
+.tools{margin-top:120px;text-align:center}
+.tools h2{font-size:36px;line-height:36px;letter-spacing:-1.08px;font-weight:400;margin:0 0 10px}
+.tools .sub{color:var(--body);margin:0 0 32px}
+.trow{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;text-align:left}
+.trow div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;min-height:150px;display:flex;flex-direction:column}
+.trow b{font-size:16px;font-weight:600}
+.trow span{font-size:13px;line-height:18px;color:var(--body);margin:6px 0 auto}
+.trow code{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.trow{grid-template-columns:1fr 1fr}}
+/* harness strip */
+.strip{margin-top:120px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.strip span{background:var(--chip);border-radius:6px;padding:8px 12px;font-size:14px}
+.strip small{flex-basis:100%;text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+/* install */
+.install{margin-top:120px;border-radius:24px;background:var(--green);color:#fff;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.install h2{font-size:36px;line-height:36px;letter-spacing:-1.08px;font-weight:400;margin:0 0 14px}
+.install p{margin:0;color:rgba(255,255,255,.85);max-width:400px}
+.install pre{margin:0;background:rgba(0,0,0,.35);border-radius:12px;padding:20px;font-size:13px;line-height:22px;overflow:auto}
+.install .btn{margin-top:22px;background:var(--accent);color:var(--accentfg)}
+@media(max-width:900px){.install{grid-template-columns:1fr;padding:28px}}
+/* footer */
+footer{margin-top:120px;border-top:1px solid var(--line);padding:48px 30px 56px}
+footer .in{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:24px;font-size:14px}
+footer h5{margin:0 0 12px;font-size:14px;font-weight:600}
+footer a{display:block;line-height:28px;color:var(--body)}
+footer .bottom{max-width:1380px;margin:40px auto 0;font-size:13px;color:var(--muted)}
+@media(max-width:900px){footer .in{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="mark" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7z"/></svg>HexoKit</a>
+  <nav class="links"><a href="#">Product</a><a href="#">Toolkit</a><a class="p" href="#">Docs</a><a class="p" href="#">Releases</a><a href="#">Reach it</a></nav>
+  <div class="right"><a class="txt" href="#">GitHub</a><a class="btn" href="#">Docs</a><a class="btn cta" href="#install">Install</a><button class="theme" aria-label="Toggle theme" onclick="tt()">◐</button></div>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Your tmux, in the browser and on your phone.</h1>
+    <p class="sub">Then tell the operator what to do next.</p>
+    <div class="prompt">
+      <div class="ph"><b>Start the next wave of tracked changes</b> and ping me if any review fails…</div>
+      <span class="plus">+</span><span class="cmd">rk operator request</span><span class="send">→</span>
+    </div>
+    <div class="kinds">
+      <span class="arr">←</span>
+      <a href="#"><i><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 10l3 2-3 2"/></svg></i>Sessions</a>
+      <a href="#"><i><svg viewBox="0 0 24 24"><path d="M3 5h8v14H3zM13 5h8v6h-8zM13 13h8v6h-8z"/></svg></i>Boards</a>
+      <a href="#"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></i>Operator</a>
+      <a href="#"><i><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 19h2"/></svg></i>Phone</a>
+      <a href="#"><i><svg viewBox="0 0 24 24"><path d="M3 5h18v12H3zM9 21h6"/></svg></i>GUI</a>
+      <span class="arr">→</span>
+    </div>
+    <p class="try">Try an operator request ↻</p>
+    <div class="chips"><span>Start C8 and C9</span><span>Archive the merged changes</span><span>Rework 7ajq, review failed</span></div>
+  </section>
+
+  <section class="bento">
+    <div class="bc peach"><div><h2>The agent plans before it builds</h2><p>fab-kit scores every assumption. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p><a class="btn" href="#">How the gate works</a></div><pre class="mono">$ fab score --check-gate 7ajq
+confidence 2.6 / 5.0 · gate 3.0
+<span class="bad">blocked</span> · 1 unresolved
+run /fab-clarify
+
+$ fab score --check-gate 7ajq
+confidence 3.4 / 5.0 · gate 3.0
+<span class="ok">pass</span></pre></div>
+    <div class="bc green"><div><h2>One agent watches the others</h2><p>rk operator starts the next change, unblocks a stuck one, and pings your phone. Its console slides down over any tab.</p><a class="btn" href="#">Meet the operator</a></div><div class="vis"><img src="assets/hexokit-operator.webp" width="1080" height="675" alt="The operator popover reporting on tracked changes and asking whether to start the next wave."></div></div>
+    <div class="bc sand"><div><h2>Steer it from your phone</h2><p>Serve it over Tailscale. Same panes, a key bar for tab, ctrl and arrows. Push arrives with the tab closed.</p><a class="btn" href="#">Set up Tailscale</a></div><figure class="phone" style="margin:0 0 -120px"><img src="assets/hexokit-phone-terminal.webp" width="800" height="1739" alt="A live tmux pane on a phone with a key bar."></figure></div>
+    <div class="bc slate"><div><h2>Give the agent a screen</h2><p>rk gui on puts a desktop in a tile. The agent clicks, types and screenshots. You watch. Off by default.</p><a class="btn" href="#">Read the GUI guide</a></div><pre class="mono">$ rk gui on
+gui: on (:10, 1920x1080, icewm)
+$ rk gui exec --detach chrome
+$ rk gui click 812 344
+$ rk gui type "hexokit.com/docs"
+$ rk gui shot --json
+{"ok":true,"path":"…/1132.png"}</pre></div>
+  </section>
+
+  <section class="tools">
+    <h2>HexoKit is the base. Each tool adds one thing.</h2>
+    <p class="sub">Six small CLIs. Drop any one and the rest keep working.</p>
+    <div class="trow">
+      <div><b>fab-kit</b><span>A plan before any agent writes code.</span><code>/fab-new</code></div>
+      <div><b>wt</b><span>Throwaway git worktrees, one per change.</span><code>wt create</code></div>
+      <div><b>idea</b><span>Catch an idea without breaking flow.</span><code>idea add</code></div>
+      <div><b>tu</b><span>What your AI coding sessions cost.</span><code>tu --watch</code></div>
+      <div><b>hop</b><span>Jump to any of your repos.</span><code>hop --all pull</code></div>
+      <div><b>shll</b><span>Installs and updates the whole set.</span><code>shll setup agent</code></div>
+    </div>
+  </section>
+
+  <div class="strip"><span>Claude Code</span><span>Codex</span><span>Gemini CLI</span><span>Copilot CLI</span><span>Kimi Code</span><span>OpenCode</span><span>Antigravity</span><small>Every harness reports working, waiting or idle. A pane is just as happily a build, a REPL, ssh, htop.</small></div>
+
+  <section class="install" id="install">
+    <div><h2>One line, then you are in.</h2><p>Needs tmux 3.4 or newer. Run rk doctor if anything looks wrong. MIT, all seven repos.</p><a class="btn" href="#">Install HexoKit</a></div>
+    <pre class="mono">$ curl -fsSL hexokit.com/install | sh
+$ rk daemon start
+$ open http://localhost:3000
+$ rk tutorial</pre>
+  </section>
+</main>
+
+<footer><div class="in">
+  <div><a class="mark" href="#">HexoKit</a><p style="color:var(--body);margin-top:12px;max-width:260px">A console for your tmux, built for the phone. Any agent, no database.</p></div>
+  <div><h5>Product</h5><a href="#">Docs</a><a href="#">Install</a><a href="#">Boards</a><a href="#">GUI</a><a href="#">Desktop app</a></div>
+  <div><h5>Toolkit</h5><a href="#">fab-kit</a><a href="#">wt</a><a href="#">idea</a><a href="#">tu</a><a href="#">hop</a><a href="#">shll</a></div>
+  <div><h5>Community</h5><a href="#">GitHub</a><a href="#">Discord</a><a href="#">Releases</a></div>
+  <div><h5>Machines</h5><a href="#">versions.json</a><a href="#">llms.txt</a><a href="#">MCP</a></div>
+</div><div class="bottom">© 2026 HexoKit · MIT</div></footer>
+<script>function tt(){var r=document.documentElement,d=r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.dataset.theme=d==='dark'?'light':'dark'}</script>
+</body>
+</html>
