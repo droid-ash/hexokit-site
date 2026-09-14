@@ -229,7 +229,6 @@ protocol. When the agent tools change again, this layer stays put.
 **H** One line, then you are in.
 ```
 curl -fsSL hexokit.com/install | sh
-brew install sahil87/tap/hexokit
 ```
 Needs tmux 3.4 or newer. Run `rk doctor` if anything looks wrong.
 Then: `rk daemon start` · open `localhost:3000` · `rk tutorial`.
