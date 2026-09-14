@@ -23,6 +23,16 @@ Open `index.html` for the gallery (rationale, thumbnails, links), or any
 | 11 | `11-cognition.html` | cognition.ai | serif body, 605px measure, exposed grid, gutter numbers, manifesto | what it isn't |
 | 12 | `12-n8n.html` | n8n.io | floating nav card, glowing object, node canvas, glass info cards | operator |
 
+## Two variations per iteration
+
+`NN-name.html` (**A**) uses the real product screenshots from `assets/`.
+`NN-name-b.html` (**B**) is generated from A by `make-b.py`: every screenshot is
+replaced by a **minimal schematic** drawn in HTML/CSS — the real layout and chrome,
+three to six elements, big type, nothing else — sized to the same box so nothing
+reflows. 09 and 11 get the "no product" treatment their references use (a lone
+hexagon; a thin strip). A and B are otherwise identical: compare them for visual
+density only. Edit an A file, then `python3 make-b.py` to refresh its B.
+
 ## What is copied, what is not
 
 Copied: layout, type scale, line heights, tracking, spacing rhythm, container

@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HexoKit — iteration 03 · Langfuse structure · B (minimal)</title>
+<!--
+  ITERATION 03 — structure measured from langfuse.com (2026-09-13, 1440px).
+  Copied: warm grey page rgb(237,237,232) with lighter surfaces rgb(246,246,243) · Inter 16/24
+  body, a geometric grotesk display at H1 68px/71.4 weight 500 with yellow highlight marks
+  rgb(251,255,122) · H2 32/36.8 · 60px sticky nav · an 840px centred column with sticky side
+  rails (mono 11px labels) · 32px-tall, 2px-radius buttons with a key-hint square · a bordered
+  product frame with crosshair corner marks under a tab strip · 120px section rhythm · small
+  bordered feature cards with hand-drawn-style line sketches · chip grids ("works with any
+  stack") · a comparison table · a numbered quick-start · FAQ. Not copied: their logo, f37
+  Analog, their illustrations, their copy. Display face: Space Grotesk (nearest free).
+  Lead beat: 1 → second act: 3 (see every agent — the observability angle), then 2, 4, 5, 6.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edede8;--surface:#f6f6f3;--fg:#020817;--muted:#6b6b66;--border:#cfcfc9;--border2:#e1e7ef;--hl:#fbff7a;--hlfg:#111;--btn:#222220;--btnfg:#f6f6f3;--btnbd:#3d3d38;--ok:#2f7d4d;--bad:#c0392b;--accent:#a8761a;--blue:#3a7bd5}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#121211;--surface:#1b1b19;--fg:#ecece6;--muted:#9c9c94;--border:#33332f;--border2:#2a2a27;--btn:#ecece6;--btnfg:#121211;--btnbd:#ecece6;--ok:#5fbf7f;--bad:#e06c5a;--accent:#d4a73a;--blue:#6ea3e8}}
+:root[data-theme=dark]{--bg:#121211;--surface:#1b1b19;--fg:#ecece6;--muted:#9c9c94;--border:#33332f;--border2:#2a2a27;--btn:#ecece6;--btnfg:#121211;--btnbd:#ecece6;--ok:#5fbf7f;--bad:#e06c5a;--accent:#d4a73a;--blue:#6ea3e8}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/24px Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.display{font-family:"Space Grotesk",Inter,sans-serif;font-weight:500}
+mark{background:var(--hl);color:var(--hlfg);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+/* banner + nav */
+.banner{height:32px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;border-bottom:1px solid var(--border);color:var(--muted)}
+.banner b{color:var(--fg);font-weight:500}
+.nav{position:sticky;top:0;height:60px;background:var(--bg);z-index:10;border-bottom:1px solid var(--border)}
+.nav .in{max-width:1520px;margin:0 auto;height:60px;display:flex;align-items:center;gap:22px;padding:0 24px}
+.mark{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px}
+.mark svg{width:20px;height:20px}
+.nav .links{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+.nav .links a:hover{color:var(--fg)}
+.nav .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;height:32px;padding:3px 3px 3px 10px;border-radius:2px;font-size:14px;line-height:1;border:1px solid var(--border);background:var(--surface);color:var(--fg)}
+.btn kbd{font:500 11px/1 "JetBrains Mono",monospace;background:var(--bg);border:1px solid var(--border);border-radius:2px;min-width:22px;height:22px;display:grid;place-items:center;color:var(--muted)}
+.btn.primary{background:var(--btn);color:var(--btnfg);border-color:var(--btnbd)}
+.btn.primary kbd{background:transparent;border-color:rgba(255,255,255,.25);color:inherit}
+.theme{width:32px;height:32px;border-radius:2px;border:1px solid var(--border);background:var(--surface);color:var(--fg);cursor:pointer}
+@media(max-width:900px){.nav .links{display:none}}
+/* three-column shell */
+.shell{max-width:1520px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr) 200px;gap:24px;padding:0 24px}
+.rail{position:sticky;top:84px;align-self:start;font-size:12px;line-height:18px;color:var(--muted);padding-top:60px}
+.rail h6{margin:0 0 6px;font:500 11px/16px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fg)}
+.rail .grp{margin-bottom:22px}
+.rail .row{display:flex;justify-content:space-between;gap:8px}
+.rail .row b{color:var(--fg);font-weight:500}
+.rail a{display:block;padding:1px 0}
+.rail a.on{color:var(--fg)}
+@media(max-width:1280px){.shell{grid-template-columns:1fr}.rail{display:none}}
+.col{max-width:840px;margin:0 auto;width:100%}
+.wide{width:min(1240px,100%);margin-left:50%;transform:translateX(-50%)}
+@media(max-width:1280px){.wide{width:100%;margin-left:0;transform:none}}
+/* hero */
+.hero{padding-top:60px;text-align:center}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.chip{font:500 12px/1 "JetBrains Mono",monospace;border:1px solid var(--border);background:var(--surface);border-radius:2px;padding:7px 10px;color:var(--muted);display:inline-flex;gap:6px;align-items:center}
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--ok);display:inline-block}
+h1{font-size:68px;line-height:71.4px;margin:0 auto;max-width:780px}
+.hero p{font-size:16px;line-height:24px;color:var(--muted);max-width:560px;margin:24px auto 0}
+.hero .ctas{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.logos{margin-top:40px;display:flex;justify-content:center;gap:0;flex-wrap:wrap;font-size:13px;color:var(--muted);font-weight:500}
+.logos span{padding:6px 18px;border-left:1px solid var(--border)}
+.logos span:first-child{border:0}
+.logos small{flex-basis:100%;text-align:center;font-size:11px;color:var(--muted);margin-top:10px;font-family:"JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:900px){h1{font-size:40px;line-height:44px}}
+/* ask bar */
+.ask{margin:40px auto 0;display:flex;gap:8px;max-width:600px;background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:6px 6px 6px 14px;align-items:center;font-size:14px;color:var(--muted)}
+.ask span{flex:1;text-align:left}
+.ask .btn{height:30px}
+/* tabs + frame */
+.tabs{display:flex;gap:2px;margin-top:40px;border-bottom:1px solid var(--border);justify-content:flex-start;overflow:auto}
+.tabs a{font-size:13px;padding:10px 14px;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a.on{color:var(--fg);border-bottom-color:var(--fg)}
+.frame{position:relative;margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:8px}
+.frame img{border:1px solid var(--border2)}
+.frame::before,.frame::after,.frame .cm::before,.frame .cm::after{content:"+";position:absolute;font:400 16px/1 "JetBrains Mono",monospace;color:var(--muted)}
+.frame::before{left:-7px;top:-9px}.frame::after{right:-7px;top:-9px}.frame .cm::before{left:-7px;bottom:-9px}.frame .cm::after{right:-7px;bottom:-9px}
+.frame .cap{font:400 11px/16px "JetBrains Mono",monospace;color:var(--muted);padding:8px 4px 0;display:flex;justify-content:space-between}
+/* sections */
+.sec{padding-top:120px}
+h2{font-size:32px;line-height:36.8px;margin:0}
+.sec .lead{font-size:16px;line-height:24px;color:var(--muted);max-width:640px;margin:16px 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:40px}
+@media(max-width:900px){.two{grid-template-columns:1fr}h2{font-size:26px;line-height:30px}}
+.sketch{border:1px solid var(--border);background:var(--surface);border-radius:2px;padding:24px;min-height:260px;display:grid;place-items:center;color:var(--muted)}
+.sketch svg{width:100%;max-width:360px;height:auto;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round}
+.callout{margin-top:24px;border:1px solid var(--border);background:var(--surface);border-radius:2px;padding:18px 20px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.callout b{display:block;font-weight:500;font-size:15px}
+.callout span{font-size:13px;color:var(--muted)}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+.card{border:1px solid var(--border);background:var(--surface);border-radius:2px;padding:16px;min-height:200px;display:flex;flex-direction:column}
+.card h4{margin:0 0 6px;font-size:14px;font-weight:600}
+.card p{margin:0;font-size:13px;line-height:19.5px;color:var(--muted);flex:1}
+.card .sk{height:64px;margin-top:14px;border-top:1px dashed var(--border);display:flex;align-items:flex-end;padding-top:10px}
+.card .sk code{font-size:11.5px;color:var(--fg)}
+.card svg{width:56px;height:40px;fill:none;stroke:var(--muted);stroke-width:1}
+.card.big{grid-column:span 2}
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}.card.big{grid-column:span 2}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}.card.big{grid-column:span 1}}
+/* chip groups */
+.grp{margin-top:32px;border:1px solid var(--border);background:var(--surface);border-radius:2px;padding:18px 20px}
+.grp h5{margin:0 0 12px;font:500 11px/16px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.grp .row{display:flex;flex-wrap:wrap;gap:8px}
+.grp .row span{font-size:13px;border:1px solid var(--border);border-radius:2px;padding:5px 10px;background:var(--bg)}
+/* facts */
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px}
+.fact{border:1px solid var(--border);background:var(--surface);border-radius:2px;padding:20px}
+.fact h4{margin:0 0 8px;font-size:15px;font-weight:600}
+.fact ul{margin:0;padding:0;list-style:none;font-size:13.5px;line-height:22px;color:var(--muted)}
+.fact li::before{content:"✓ ";color:var(--ok)}
+.fact pre{margin:10px 0 0;font-size:12px;line-height:18px;background:var(--bg);border:1px solid var(--border);padding:10px 12px;overflow:auto}
+@media(max-width:700px){.facts{grid-template-columns:1fr}}
+/* table */
+table.cmp{width:100%;border-collapse:collapse;margin-top:40px;font-size:14px;line-height:21px}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:14px 12px;border-top:1px solid var(--border)}
+.cmp th{width:200px;font-weight:600}
+.cmp tr:last-child td,.cmp tr:last-child th{border-bottom:1px solid var(--border)}
+.cmp td{color:var(--muted)}
+.cmp td b{color:var(--fg);font-weight:500}
+/* steps */
+.steps{margin-top:40px;border:1px solid var(--border);background:var(--surface);border-radius:2px}
+.step{display:grid;grid-template-columns:48px 1fr 1.2fr;gap:16px;padding:18px 20px;border-top:1px solid var(--border);align-items:center}
+.step:first-child{border-top:0}
+.step .n{font:500 12px/1 "JetBrains Mono",monospace;color:var(--muted)}
+.step b{font-weight:500;font-size:14px;display:block}
+.step span{font-size:13px;color:var(--muted)}
+.step pre{margin:0;font-size:12.5px;line-height:19px;background:var(--bg);border:1px solid var(--border);padding:10px 12px;overflow:auto}
+@media(max-width:700px){.step{grid-template-columns:1fr}}
+/* faq */
+.faq{margin-top:40px;display:grid;grid-template-columns:1fr 2fr;gap:40px}
+.faq details{border-top:1px solid var(--border);padding:14px 0}
+.faq details:last-child{border-bottom:1px solid var(--border)}
+.faq summary{cursor:pointer;font-size:15px;font-weight:500;list-style:none;display:flex;justify-content:space-between}
+.faq summary::after{content:"+";color:var(--muted)}
+.faq p{margin:10px 0 0;font-size:14px;line-height:21px;color:var(--muted)}
+@media(max-width:900px){.faq{grid-template-columns:1fr}}
+/* footer */
+footer{margin-top:140px;border-top:1px solid var(--border);padding:48px 24px 56px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:24px;font-size:13px}
+footer h6{margin:0 0 10px;font:500 11px/16px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+footer a{display:block;line-height:26px;color:var(--muted)}
+footer a:hover{color:var(--fg)}
+footer .bottom{max-width:1240px;margin:36px auto 0;font:400 11px/16px "JetBrains Mono",monospace;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:900px){footer .in{grid-template-columns:1fr 1fr}}
+/* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
+pre{max-width:100%;overflow-x:auto}.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}@media(max-width:1280px){.shell{grid-template-columns:minmax(0,1fr)}.col,.wide{min-width:0}}@media(max-width:900px){.two{grid-template-columns:minmax(0,1fr)}.cmp th{width:auto}.step{grid-template-columns:minmax(0,1fr)}.steps,.facts,.cards{min-width:0}.facts{grid-template-columns:minmax(0,1fr)}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font:500 20px/28px "Space Grotesk",Inter,sans-serif;color:var(--fg);margin:18px auto 0;max-width:none}
+/* ── minimal schematic kit (variation B): real layout, ≤6 elements, no images ── */
+.mk{--mk-bg:#0f1216;--mk-bg2:#141920;--mk-fg:#d8dce4;--mk-mut:#6f7987;--mk-line:rgba(255,255,255,.09);--mk-acc:#d4a73a;--mk-ok:#59d499;--mk-warn:#ffc533;--mk-bad:#ff6161;
+ width:100%;aspect-ratio:var(--ar,16/10);background:var(--mk-bg);color:var(--mk-fg);font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:clamp(8px,1.45cqw,15px);line-height:1.55;display:grid;overflow:hidden;box-sizing:border-box;position:relative;container-type:inline-size;text-align:left;font-weight:400;letter-spacing:0;font-style:normal}
+.mk *{box-sizing:border-box;margin:0;text-shadow:none}
+.mk .mk-top{grid-area:top;display:flex;align-items:center;gap:1em;padding:.7em 1.1em;border-bottom:1px solid var(--mk-line);color:var(--mk-mut);font-size:.9em;white-space:nowrap;overflow:hidden}
+.mk .mk-top b{color:var(--mk-fg);font-weight:500}
+.mk .mk-top i{width:.9em;height:.9em;border-radius:50%;background:var(--mk-line);flex:none}
+.mk .mk-top i.r{margin-left:auto}
+.mk aside{grid-area:side;border-right:1px solid var(--mk-line);padding:.9em 0;overflow:hidden}
+.mk aside small{display:block;padding:0 1.1em .5em;font-size:.75em;letter-spacing:.08em;color:var(--mk-mut)}
+.mk aside div{display:flex;align-items:center;gap:.7em;padding:.45em 1.1em;white-space:nowrap;overflow:hidden}
+.mk aside div em{font-style:normal;color:var(--mk-mut);margin-left:auto;font-size:.85em}
+.mk aside div.cur{background:var(--mk-bg2)}
+.mk s{width:.7em;height:.7em;border-radius:50%;border:2px solid var(--mk-mut);flex:none;text-decoration:none;display:inline-block;position:relative}
+.mk s.on{background:var(--mk-acc);border-color:var(--mk-acc)}
+.mk s.wait{border-color:var(--mk-warn);box-shadow:0 0 0 .25em rgba(255,197,51,.22)}
+.mk s.ok{background:var(--mk-ok);border-color:var(--mk-ok)}
+.mk s.bad{background:var(--mk-acc);border-color:var(--mk-acc)}
+.mk s.bad::after{content:"";position:absolute;inset:.12em;border-radius:50%;background:var(--mk-bad)}
+.mk main{grid-area:main;padding:1.1em 1.4em;overflow:hidden}
+.mk main p{white-space:nowrap}
+.mk main p.d{color:var(--mk-mut)}
+.mk .ok{color:var(--mk-ok)}.mk .warn{color:var(--mk-warn)}.mk .bad{color:var(--mk-bad)}.mk .acc{color:var(--mk-acc)}
+.mk footer{grid-area:foot;padding:.5em 1.1em;border-top:1px solid var(--mk-line);color:var(--mk-mut);font-size:.85em;white-space:nowrap;overflow:hidden}
+.mk-dash{grid-template:"top top" auto "side main" 1fr "foot foot" auto / 30% 1fr}
+.mk-phone{grid-template:"top" auto "side" auto "main" 1fr "keys" auto / 1fr;font-size:clamp(8px,3.8cqw,15px)}
+.mk-phone aside{border-right:0;border-bottom:1px solid var(--mk-line)}
+.mk-phone.term{grid-template:"top" auto "main" 1fr "keys" auto / 1fr}
+.mk .mk-keys{grid-area:keys;display:flex;gap:.4em;padding:.7em .9em;border-top:1px solid var(--mk-line);background:var(--mk-bg2)}
+.mk .mk-keys span{flex:1;text-align:center;padding:.5em 0;border-radius:.4em;background:var(--mk-bg);border:1px solid var(--mk-line);font-size:.85em}
+.mk-op{grid-template:"top" auto "main" 1fr / 1fr}
+.mk-op .mk-in{margin-top:.7em;padding-top:.7em;border-top:1px solid var(--mk-line)}
+.mk-op .mk-in span{color:var(--mk-mut)}
+.mk-board{grid-template:"top top top" auto "a b c" 1fr / 1fr 1fr 1fr}
+.mk-board section{padding:.9em 1.1em;border-right:1px solid var(--mk-line);overflow:hidden}
+.mk-board section:last-child{border-right:0}
+.mk-board section header{display:flex;align-items:center;gap:.6em;color:var(--mk-mut);margin-bottom:.6em;white-space:nowrap}
+.mk-board section p{white-space:nowrap}
+.mk-state{grid-template:"top" auto "side" 1fr / 1fr}
+.mk-state aside{border-right:0}
+.mk-state aside div{padding:.6em 1.1em}
+.mk-hexo{display:grid;place-items:center;gap:28px;color:var(--fg);padding:40px 0}
+.mk-hexo svg{width:min(260px,60%);aspect-ratio:200/220;fill:none;stroke:currentColor;stroke-width:1.2;filter:drop-shadow(0 0 40px var(--glow,rgba(255,255,255,.12)))}
+.mk-hexo p{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="banner"><b>v3.19.58</b> The operator's console drops in from any tab, Quake-style · <a href="#" style="text-decoration:underline">Read the release</a></div>
+<header class="nav"><div class="in">
+  <a class="mark" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7z"/><path d="M12 22V12M3.5 7L12 12l8.5-5"/></svg>hexokit</a>
+  <nav class="links"><a href="#">Docs</a><a href="#">Toolkit</a><a href="#">Desktop</a><a href="#">Releases</a><a href="#">Discord</a><a href="#">GitHub</a></nav>
+  <div class="right"><a class="btn" href="#">Read the docs <kbd>D</kbd></a><a class="btn primary" href="#install">Install <kbd>I</kbd></a><button class="theme" aria-label="Toggle theme" onclick="tt()">◐</button></div>
+</div></header>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="grp"><h6>Project</h6><div class="row"><span>License</span><b>MIT</b></div><div class="row"><span>Repos</span><b>7</b></div><div class="row"><span>Latest</span><b>v3.19.60</b></div><div class="row"><span>Needs</span><b>tmux ≥ 3.4</b></div></div>
+    <div class="grp"><h6>Releases</h6><a href="#">Quake operator page <span style="float:right">1d</span></a><a href="#">rk operator request <span style="float:right">1d</span></a><a href="#">Desktop picker <span style="float:right">2d</span></a><a href="#">GUI agent verbs <span style="float:right">2d</span></a></div>
+    <div class="grp"><h6>Reach it</h6><a href="#">Browser</a><a href="#">Phone over Tailscale</a><a href="#">macOS desktop app</a><a href="#">MCP client</a></div>
+  </aside>
+
+  <main class="col">
+    <section class="hero">
+      <div class="chips"><span class="chip"><i></i>MIT · all seven repos</span><span class="chip">no database</span><span class="chip">7 harnesses report state</span></div>
+      <h1 class="display">Your tmux, in the <mark>browser</mark> and on your <mark>phone.</mark></h1>
+      <p class="subline">Cockpit for the agent era.</p>
+      <p>A remote console for the machine you actually work on. Every tmux session and pane is a live terminal, at your desk or on the couch. Nothing to configure, and state is read straight from tmux.</p>
+      <div class="ctas"><a class="btn primary" href="#install">Install <kbd>I</kbd></a><a class="btn" href="#">Documentation <kbd>D</kbd></a><a class="btn" href="#"><kbd>T</kbd> rk tutorial</a></div>
+      <div class="logos"><span>Claude Code</span><span>Codex</span><span>Gemini CLI</span><span>Copilot CLI</span><span>Kimi Code</span><span>OpenCode</span><span>Antigravity</span><small>every harness reports working · waiting · idle</small></div>
+      <div class="ask mono"><span>rk operator request&nbsp; <em style="color:var(--fg);font-style:normal">start the next wave of tracked changes</em></span><a class="btn" href="#">Ask <kbd>↵</kbd></a></div>
+    </section>
+
+    <div class="wide">
+      <nav class="tabs"><a class="on" href="#">Sessions</a><a href="#">Boards</a><a href="#">Operator</a><a href="#">Agent state</a><a href="#">Phone</a><a href="#">GUI</a></nav>
+      <figure class="frame"><span class="cm"></span><div class="mk mk-dash" style="--ar:2400/1506;"><div class="mk-top"><b>▤ HexoKit</b><span>⌘K</span><i class="r"></i><i></i><i></i></div><aside><small>SESSIONS · runKit</small><div class="cur"><s class="on"></s>swift-fox<em>building</em></div><div><s class="wait"></s>calm-heron<em>waiting on you</em></div><div><s class="on"></s>amber-tern<em>building</em></div><div><s></s>dev<em>just dev</em></div><div><s></s>htop</div></aside><main><p>$ rk riff -N 3</p><p class="d">→ swift-fox · calm-heron · amber-tern</p><p><b class="ok">●</b> building &nbsp;<b class="ok">●</b> building &nbsp;<b class="warn">◌</b> waiting on you</p><p class="d">$ rk operator</p><p class="acc">▌</p></main><footer>agt waiting 12s · 3 tracked · cpu 9% · dev-ws</footer></div><div class="cap"><span>dev-ws-sahil02 · 3 servers · 23 windows</span><span>state read from tmux, 0 rows in any database</span></div></figure>
+    </div>
+    <div class="wide" style="margin-top:20px"><div class="two" style="margin-top:0"><figure class="frame" style="margin:0"><span class="cm"></span><div class="mk mk-op" style="--ar:1600/726;"><div class="mk-top"><b>⌁ OPERATOR</b><span>runKit · idle 56m</span><i class="r"></i></div><main><p class="d">Ran 1 shell command</p><p>All green. Merging.</p><p>Merged. PR #865.</p><p class="d">0 tracked · loop stopped</p><p>Start C8 and C9?</p><p class="mk-in">› <span>start C8 and C9</span><b class="acc">▌</b></p></main></div><div class="cap"><span>rk operator · the console over any tab</span><span>one shortcut, slides down, your pane never moves</span></div></figure><figure class="frame" style="margin:0"><span class="cm"></span><div class="mk mk-board" style="--ar:1400/875;"><div class="mk-top"><b>▤ board · agents</b><span>3 pinned</span><i class="r"></i></div><section style="grid-area:a"><header><s class="on"></s>swift-fox</header><p>Ran 3 tests</p><p class="ok">all green</p><p class="d">▌</p></section><section style="grid-area:b"><header><s class="wait"></s>calm-heron</header><p>? auth provider</p><p class="d">waiting on you</p><p class="acc">▌</p></section><section style="grid-area:c"><header><s></s>dev</header><p>$ just dev</p><p class="d">:4321 ready</p></section></div><div class="cap"><span>board · agents</span><span>rk riff -N 3 · the same board on your phone</span></div></figure></div></div>
+
+    <section class="sec" id="observe">
+      <h2 class="display">Plan, build, review — <mark>repeat.</mark></h2>
+      <p class="lead">fab-kit puts an intake stage in front of every change. The agent writes the plan and scores each assumption. Below the gate, the pipeline refuses to run and tells you what to clarify. Review runs in a fresh sub-agent and loops back up to three times.</p>
+      <div class="two">
+        <div class="sketch"><svg viewBox="0 0 360 220"><rect x="10" y="90" width="70" height="40" rx="3"/><text x="45" y="115" font-size="11" text-anchor="middle" fill="currentColor" stroke="none">intake</text><path d="M80 110h30"/><rect x="110" y="90" width="70" height="40" rx="3"/><text x="145" y="115" font-size="11" text-anchor="middle" fill="currentColor" stroke="none">apply</text><path d="M180 110h30"/><rect x="210" y="90" width="70" height="40" rx="3"/><text x="245" y="115" font-size="11" text-anchor="middle" fill="currentColor" stroke="none">review</text><path d="M245 90V60H145v30" stroke-dasharray="3 3"/><path d="M280 110h30"/><rect x="310" y="90" width="40" height="40" rx="3"/><text x="330" y="115" font-size="10" text-anchor="middle" fill="currentColor" stroke="none">ship</text><path d="M10 170h340" stroke-dasharray="2 4"/><text x="10" y="195" font-size="10" fill="currentColor" stroke="none">gate: confidence ≥ 3.0 / 5.0 before apply</text><path d="M45 130v40"/><circle cx="45" cy="170" r="3"/></svg></div>
+        <div>
+          <div class="fact" style="padding:0;border:0;background:none"><pre class="mono" style="margin:0">$ fab score --check-gate 7ajq
+confidence 2.6 / 5.0 · gate 3.0 · <span style="color:var(--bad)">blocked</span>
+  1 unresolved: auth provider — run /fab-clarify
+
+$ fab score --check-gate 7ajq
+confidence 3.4 / 5.0 · gate 3.0 · <span style="color:var(--ok)">pass</span></pre></div>
+          <p style="font-size:13.5px;line-height:21px;color:var(--muted);margin:16px 0 0">Four questions per decision. How clear was the signal, how reversible is it, can the agent actually know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. One risky guess stays visible; it is never averaged away.</p>
+        </div>
+      </div>
+      <div class="callout"><div><b>The full guide to the confidence gate</b><span>SRAD scoring, the four grades, and what /fab-clarify does with a Tentative row.</span></div><a class="btn" href="#">Read the guide <kbd>→</kbd></a></div>
+    </section>
+
+    <section class="sec">
+      <h2 class="display">All the tools, <mark>one</mark> workflow.</h2>
+      <p class="lead">HexoKit is the base. Each tool adds one thing. Drop any one and the rest keep working.</p>
+      <div class="cards">
+        <div class="card big"><h4>HexoKit</h4><p>Every tmux session and pane as a live terminal, in a sidebar, from any device. Boards, status dots, the operator, push to your phone.</p><div class="sk"><code>rk daemon start · rk riff -N 3 · rk operator</code></div></div>
+        <div class="card"><h4>fab-kit</h4><p>A plan before any agent writes code. Six stages you cannot skip.</p><div class="sk"><code>/fab-new</code></div></div>
+        <div class="card"><h4>wt</h4><p>Throwaway git worktrees, one per change.</p><div class="sk"><code>wt create flaky-tz</code></div></div>
+        <div class="card"><h4>idea</h4><p>Catch an idea without breaking flow. A markdown backlog.</p><div class="sk"><code>idea add "…"</code></div></div>
+        <div class="card"><h4>tu</h4><p>What your AI coding sessions cost, today.</p><div class="sk"><code>tu --watch</code></div></div>
+        <div class="card"><h4>hop</h4><p>Jump to any of your repos. Pull them all.</p><div class="sk"><code>hop --all pull</code></div></div>
+        <div class="card"><h4>shll</h4><p>Installs and updates the whole set.</p><div class="sk"><code>shll setup agent</code></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2 class="display">Works with <mark>any agent.</mark></h2>
+      <p class="lead">A pane is just a pane. HexoKit reads no agent's output and speaks no agent's protocol.</p>
+      <div class="grp"><h5>Agent harnesses · report working / waiting / idle</h5><div class="row"><span>Claude Code</span><span>Codex</span><span>Gemini CLI</span><span>GitHub Copilot CLI</span><span>Kimi Code</span><span>OpenCode</span><span>Antigravity CLI</span></div></div>
+      <div class="grp"><h5>Anything else in a pane</h5><div class="row"><span>a build</span><span>a REPL</span><span>an ssh session</span><span>htop</span><span>just dev</span><span>tail -f</span><span>a database shell</span><span>vim</span></div></div>
+      <div class="grp"><h5>Reach it from</h5><div class="row"><span>any browser</span><span>your phone over Tailscale</span><span>the macOS desktop app</span><span>an MCP client · rk mcp</span><span>another agent · rk skill</span></div></div>
+    </section>
+
+    <section class="sec">
+      <h2 class="display">Open platform. <mark>Open source.</mark></h2>
+      <div class="facts">
+        <div class="fact"><h4>Plain files</h4><ul><li>every plan, backlog and cost report is a file</li><li>cat it, grep it, git diff it</li><li>no hidden state for the agent to lose</li></ul></div>
+        <div class="fact"><h4>Runs where you work</h4><ul><li>the daemon runs on your own machine</li><li>nothing leaves your tailnet</li><li>no account, no cloud, no database</li></ul></div>
+        <div class="fact"><h4>Made for agents too</h4><ul><li><code>rk skill</code> prints the briefing an agent reads</li><li><code>rk mcp</code> exposes the verbs to chat clients</li><li><code>rk present</code> shows an agent's HTML in a tile</li></ul><pre class="mono">$ rk notify "review failed on 7ajq" --title fab</pre></div>
+        <div class="fact"><h4>MIT, all seven repos</h4><ul><li>run-kit · fab-kit · wt · idea · tu · hop · shll</li><li>brew tap, one install line</li><li>issues and Discord, no sales call</li></ul></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2 class="display">From your <mark>phone,</mark> over your own network.</h2>
+      <p class="lead">Serve the dashboard over Tailscale and open it on your phone. Same sessions, same boards, same panes. A key bar for tab, ctrl and arrows. Push arrives with the tab closed, and nothing leaves your tailnet.</p>
+      <div class="two"><div style="display:flex;gap:16px;justify-content:center;align-items:flex-start"><figure style="margin:0;width:44%;border-radius:22px;border:6px solid #111;overflow:hidden"><div class="mk mk-phone" style="--ar:800/1739;"><div class="mk-top"><b>HexoKit</b><span>dev-ws</span><i class="r"></i></div><aside><small>SESSIONS · runKit</small><div class="cur"><s class="on"></s>swift-fox<em>building</em></div><div><s class="wait"></s>calm-heron<em>waiting on you</em></div><div><s class="on"></s>amber-tern<em>building</em></div><div><s></s>dev<em>just dev</em></div><div><s></s>htop</div></aside><main><p class="d">tap a pane</p><p class="d">you are in the shell you left at your desk</p></main><div class="mk-keys"><span>tab</span><span>ctrl</span><span>esc</span><span>↑</span><span>↓</span><span>⌘K</span></div></div></figure><figure style="margin:0;width:44%;border-radius:22px;border:6px solid #111;overflow:hidden"><div class="mk mk-phone term" style="--ar:800/1739;"><div class="mk-top"><b>calm-heron</b><span>agt waiting</span><i class="r"></i></div><main><p>$ fab score --check-gate 7ajq</p><p>confidence 3.4 / 5.0</p><p>gate 3.0 · <b class="ok">pass</b></p><p class="d">&nbsp;</p><p class="d">? proceed to apply</p><p class="acc">› y▌</p></main><div class="mk-keys"><span>tab</span><span>ctrl</span><span>esc</span><span>↑</span><span>↓</span><span>⌘K</span></div></div></figure></div><div class="fact"><h4>Three steps</h4><ul><li>enable HTTPS certificates in the Tailscale admin</li><li>serve the dashboard over your tailnet</li><li>open the ts.net address on your phone and tap a pane</li></ul><pre class="mono">$ sudo tailscale set --operator=$USER
+$ tailscale serve --bg http://localhost:3000
+→ https://dev-ws.tail1a2b.ts.net
+$ rk notify "review failed on 7ajq" --title fab</pre></div></div>
+    </section>
+
+    <section class="sec">
+      <h2 class="display">Why HexoKit?</h2>
+      <table class="cmp">
+        <tr><th>It is</th><td>A remote, phone-first <b>console for your tmux</b>. Agent-agnostic, no database, state derived from tmux and the filesystem. A spawner (<code>rk riff</code>) and a dashboard (<code>rk serve</code>) that compose.</td></tr>
+        <tr><th>It isn't</th><td>An agent wrapper. It doesn't speak any agent's protocol, parse any agent's output, or care what's in the pane. <b>That is what makes it outlive whichever agent you run.</b></td></tr>
+        <tr><th>One command per agent</th><td><code>rk riff</code> creates a worktree, opens a tmux window in it and launches your agent. <code>-N 3</code> spawns three. Failures roll back.</td></tr>
+        <tr><th>Watch a fleet</th><td>Every session and pane in a sidebar. Pin several into a board. Open the same board on your phone.</td></tr>
+        <tr><th>Keep the agent in check</th><td>With fab-kit, no code until the plan clears the gate. Review in a fresh sub-agent. Learnings written to <code>docs/memory</code>.</td></tr>
+        <tr><th>Give it a screen</th><td><code>rk gui on</code> puts a desktop in a tile. The agent clicks, types and screenshots. Off by default.</td></tr>
+      </table>
+    </section>
+
+    <section class="sec" id="install">
+      <h2 class="display">Start in <mark>under 5 minutes.</mark></h2>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><div><b>Install the toolkit</b><span>Homebrew, tap trust handled. Needs tmux 3.4 or newer.</span></div><pre class="mono">curl -fsSL hexokit.com/install | sh</pre></div>
+        <div class="step"><span class="n">02</span><div><b>Start the dashboard</b><span>A daemon in its own tmux server. Restart it and everything keeps running.</span></div><pre class="mono">rk daemon start
+open http://localhost:3000</pre></div>
+        <div class="step"><span class="n">03</span><div><b>Take the tour</b><span>An agent walks you through the product, act by act.</span></div><pre class="mono">tmux new -s work
+rk tutorial</pre></div>
+        <div class="step"><span class="n">04</span><div><b>Spawn a real workspace</b><span>A worktree, a window, your agent. Then tap it on your phone.</span></div><pre class="mono">rk riff --skill /fab-fff</pre></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="faq">
+        <h2 class="display">Questions</h2>
+        <div>
+          <details open><summary>Does HexoKit replace my coding agent?</summary><p>No. It is a layer above the one you already use. The agent writes code; HexoKit holds the terminal, the plan, the worktree and the fleet.</p></details>
+          <details><summary>What does "no database" mean?</summary><p>State is read from tmux and the filesystem on every request. Nothing to migrate, nothing to sync, nothing to lose.</p></details>
+          <details><summary>How does the phone reach my machine?</summary><p>Serve the dashboard over your tailnet with <code>tailscale serve --bg http://localhost:3000</code>, then open the ts.net address on your phone.</p></details>
+          <details><summary>Why does agent state show a dash?</summary><p>Run <code>shll setup agent</code> once, then start a fresh agent session. Hooks apply to new sessions.</p></details>
+          <details><summary>Can the agent really use the desktop?</summary><p>Yes, when you switch it on. <code>rk gui on</code> starts a private display; agents drive it with <code>rk gui exec</code>, <code>shot</code>, <code>click</code> and <code>type</code>.</p></details>
+          <details><summary>Something broke.</summary><p>Run <code>rk doctor</code>. It checks tmux, wt, the launcher, the port, and prints per-dependency status.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="rail">
+    <div class="grp"><h6>On this page</h6><a class="on" href="#">Overview</a><a href="#observe">Plan, build, review</a><a href="#">All the tools</a><a href="#">Any agent</a><a href="#">Open source</a><a href="#">Why HexoKit</a><a href="#install">Start</a><a href="#">Questions</a></div>
+  </aside>
+</div>
+
+<footer><div class="in">
+  <div><a class="mark" href="#">hexokit</a><p style="font-size:13px;color:var(--muted);margin:12px 0 0;max-width:240px">A console for your tmux, built for the phone. Any agent, no database.</p></div>
+  <div><h6>Product</h6><a href="#">Docs</a><a href="#">Install</a><a href="#">Boards</a><a href="#">GUI</a><a href="#">Desktop app</a></div>
+  <div><h6>Toolkit</h6><a href="#">fab-kit</a><a href="#">wt</a><a href="#">idea</a><a href="#">tu</a><a href="#">hop</a><a href="#">shll</a></div>
+  <div><h6>Community</h6><a href="#">GitHub</a><a href="#">Discord</a><a href="#">Releases</a></div>
+  <div><h6>Machines</h6><a href="#">versions.json</a><a href="#">llms.txt</a><a href="#">MCP</a></div>
+</div><div class="bottom"><span>© 2026 HexoKit · MIT</span><span>hexokit.com · state read straight from tmux</span></div></footer>
+<script>function tt(){var r=document.documentElement,d=r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.dataset.theme=d==='dark'?'light':'dark'}</script>
+</body>
+</html>

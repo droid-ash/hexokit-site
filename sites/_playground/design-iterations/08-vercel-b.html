@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HexoKit — iteration 08 · Vercel structure · B (minimal)</title>
+<!--
+  ITERATION 08 — structure measured from vercel.com (2026-09-13, 1440px).
+  Copied: pure black · text rgb(237,237,237), muted rgb(161,161,161) · Geist 16/24 · H1 64px/64
+  weight 400 with −3.84px tracking (−6%), left-aligned, a glowing geometric mark centred, and a
+  three-line list of use cases on the right · 64px sticky nav with 32px r6 buttons (dark with
+  1px rgb(31,31,31) border, and one light) · a centred 14px announcement line · 40px pill
+  buttons · a 7-wordmark logo row · 56px/450 −3.36px H2s · 24px/450 muted statements · hairline
+  grid rules rgb(31,31,31) framing every section · 1448px container. Not copied: the triangle,
+  Geist's licence is fine (it is open), their copy, customer logos and quotes.
+  Both themes (Vercel has light: rgb(250,250,250) / rgb(23,23,23)).
+  Lead beat: 1 → second act: 2 (Plan · Build · Ship — fab's arc in Vercel's own triptych).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafafa;--fg:#171717;--muted:#666;--dim:#8f8f8f;--line:#ebebeb;--card:#fff;--card2:#f5f5f5;--btn:#171717;--btnfg:#fafafa;--btn2:#fff;--btn2bd:#e5e5e5;--glow:rgba(0,0,0,.08);--accent:#a8761a;--ok:#2f7d4d;--bad:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#ededed;--muted:#a1a1a1;--dim:#8f8f8f;--line:#1f1f1f;--card:#0a0a0a;--card2:#111;--btn:#ededed;--btnfg:#0a0a0a;--btn2:#0a0a0a;--btn2bd:#1f1f1f;--glow:rgba(255,255,255,.35);--accent:#d4a73a;--ok:#59d499;--bad:#ff6161}}
+:root[data-theme=dark]{--bg:#000;--fg:#ededed;--muted:#a1a1a1;--dim:#8f8f8f;--line:#1f1f1f;--card:#0a0a0a;--card2:#111;--btn:#ededed;--btnfg:#0a0a0a;--btn2:#0a0a0a;--btn2bd:#1f1f1f;--glow:rgba(255,255,255,.35);--accent:#d4a73a;--ok:#59d499;--bad:#ff6161}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/24px Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+code,.mono{font-family:"Geist Mono",ui-monospace,Menlo,monospace}
+.wrap{max-width:1448px;margin:0 auto;padding:0 24px}
+.grid{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+/* nav */
+.nav{position:sticky;top:0;z-index:10;height:64px;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{height:64px;display:flex;align-items:center;gap:8px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;margin-right:16px}
+.mark svg{width:22px;height:22px}
+.nav .links a{font-size:14px;color:var(--muted);padding:6px 10px;border-radius:6px}
+.nav .links a::after{content:" ⌄";font-size:12px}
+.nav .links a.p::after{content:""}
+.nav .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;height:32px;padding:0 10px;border-radius:6px;font-size:14px;font-weight:500;background:var(--btn2);color:var(--fg);border:1px solid var(--btn2bd)}
+.btn.light{background:var(--btn);color:var(--btnfg);border-color:var(--btn)}
+.theme{width:32px;height:32px;border-radius:6px;border:1px solid var(--btn2bd);background:var(--btn2);color:var(--fg);cursor:pointer}
+@media(max-width:900px){.nav .links{display:none}}
+/* announce */
+.ann{text-align:center;font-size:14px;color:var(--muted);padding:24px 0 0}
+.ann a{color:var(--fg);margin-left:24px}
+.ann a::after{content:" ›";margin-left:6px}
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;min-height:700px;padding:0 24px}
+h1{font-size:64px;line-height:64px;letter-spacing:-3.84px;font-weight:400;margin:0;max-width:460px}
+.hero .ctas{display:flex;gap:12px;margin-top:40px}
+.pill{display:inline-flex;align-items:center;height:40px;padding:0 12px;border-radius:9999px;font-size:16px;font-weight:500}
+.pill.light{background:var(--btn);color:var(--btnfg)}
+.pill.dark{background:var(--btn2);color:var(--fg);border:1px solid var(--btn2bd)}
+.hex{display:grid;place-items:center;position:relative;height:480px}
+.hex svg{width:200px;height:220px;position:relative;filter:drop-shadow(0 0 30px var(--glow)) drop-shadow(0 0 80px var(--glow))}
+.hex::before{content:"";position:absolute;inset:0;background:radial-gradient(35% 45% at 50% 50%,var(--glow),transparent 70%);opacity:.6;filter:blur(20px)}
+.uses{font-size:16px;line-height:32px;color:var(--fg);padding-left:60px}
+@media(max-width:1000px){.hero{grid-template-columns:1fr;min-height:0;padding:48px 24px}h1{font-size:40px;line-height:40px;letter-spacing:-2px;max-width:none}.hex{height:260px}.hex svg{width:120px;height:132px}.uses{padding:0}}
+/* logos */
+.logos{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.logos div{height:112px;display:grid;place-items:center;font-size:18px;font-weight:500;border-left:1px solid var(--line)}
+.logos div:first-child{border-left:0}
+@media(max-width:900px){.logos{grid-template-columns:repeat(3,1fr)}.logos div{height:80px;font-size:15px}}
+/* triptych */
+.trip{display:grid;grid-template-columns:repeat(3,1fr)}
+.trip > div{padding:56px 40px 48px;border-left:1px solid var(--line)}
+.trip > div:first-child{border-left:0}
+.trip .lbl{font:400 13px/1 "Geist Mono",monospace;color:var(--dim);letter-spacing:.02em}
+.trip h3{font-size:32px;line-height:36px;letter-spacing:-1.6px;font-weight:450;margin:16px 0 12px}
+.trip p{margin:0;font-size:16px;line-height:24px;color:var(--muted)}
+.trip .frame{margin-top:32px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.trip pre{margin:0;padding:16px;font-size:12.5px;line-height:20px;overflow:auto}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.c{color:var(--dim)}
+.trip .frame .bar{height:34px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px;font-size:12px;color:var(--dim)}
+.trip .frame .bar i{width:8px;height:8px;border-radius:50%;background:var(--line);display:inline-block}
+@media(max-width:900px){.trip{grid-template-columns:1fr}.trip > div{border-left:0;border-top:1px solid var(--line);padding:40px 24px}}
+/* statement sections */
+.sec{border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding:96px 40px}
+.sec h2{font-size:56px;line-height:56px;letter-spacing:-3.36px;font-weight:450;margin:0}
+.sec .side{font-size:24px;line-height:32px;font-weight:450;color:var(--muted);max-width:420px}
+.sec .side b{color:var(--fg);font-weight:450}
+.sec .side .more{display:inline-block;margin-top:20px;font-size:16px;color:var(--fg)}
+.sec .side .more::after{content:" →"}
+.frames{grid-column:1/-1;display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.frames.one{grid-template-columns:1fr}
+.frame{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.frame .bar{height:36px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px;font-size:12px;color:var(--dim)}
+.frame .bar i{width:8px;height:8px;border-radius:50%;background:var(--line);display:inline-block}
+.frame pre{margin:0;padding:18px;font-size:13px;line-height:21px;overflow:auto}
+.phones{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.phones figure{margin:0;border-radius:28px;border:6px solid #111;overflow:hidden;max-width:280px}
+@media(max-width:900px){.sec{grid-template-columns:1fr;padding:56px 24px}.sec h2{font-size:36px;line-height:36px;letter-spacing:-1.8px}.frames{grid-template-columns:1fr}}
+/* quotes → facts */
+.facts{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr)}
+.facts div{padding:48px 40px;border-left:1px solid var(--line);font-size:24px;line-height:32px;font-weight:450;color:var(--muted)}
+.facts div:first-child{border-left:0}
+.facts b{color:var(--fg);font-weight:450;display:block}
+.facts small{display:block;margin-top:24px;font:400 13px/1 "Geist Mono",monospace;color:var(--dim)}
+@media(max-width:900px){.facts{grid-template-columns:1fr}.facts div{border-left:0;border-top:1px solid var(--line);padding:32px 24px}}
+/* tools */
+.tools{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr)}
+.tools div{padding:32px 24px;border-left:1px solid var(--line);min-height:200px}
+.tools div:first-child{border-left:0}
+.tools b{display:block;font-size:16px;font-weight:500}
+.tools span{display:block;font-size:14px;line-height:21px;color:var(--muted);margin:8px 0 16px}
+.tools code{font-size:12.5px}
+@media(max-width:900px){.tools{grid-template-columns:1fr 1fr}.tools div{border:0;border-top:1px solid var(--line)}}
+/* closing */
+.close{border-top:1px solid var(--line);padding:120px 40px;text-align:center}
+.close h2{font-size:56px;line-height:56px;letter-spacing:-3.36px;font-weight:450;margin:0}
+.close pre{display:inline-block;margin:32px 0 0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 20px;font-size:14px;line-height:22px;text-align:left}
+.close .ctas{display:flex;gap:12px;justify-content:center;margin-top:28px}
+/* footer */
+footer{border-top:1px solid var(--line)}
+footer .cols{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:24px;font-size:14px;padding:48px 40px 56px}
+footer h5{margin:0 0 14px;font-size:14px;font-weight:500}
+footer a{display:block;line-height:28px;color:var(--muted)}
+footer a:hover{color:var(--fg)}
+@media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr;padding:32px 24px}}
+/* phone-width overflow guard: grids that hold <pre>/<table> use minmax(0,1fr) */
+pre{max-width:100%;overflow-x:auto}.trip > div,.frames > *,.sec > *,.facts > div{min-width:0}@media(max-width:1000px){.hero{grid-template-columns:minmax(0,1fr)}}@media(max-width:900px){.trip,.frames,.frames.one,.sec,.facts{grid-template-columns:minmax(0,1fr)}.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.phones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* re-assessment: brand sub-line, SRAD mechanism, fleet proof, missing beats */
+.hero .subline{font-size:20px;line-height:28px;color:var(--muted);margin:20px 0 0;letter-spacing:-.2px}
+/* ── minimal schematic kit (variation B): real layout, ≤6 elements, no images ── */
+.mk{--mk-bg:#0f1216;--mk-bg2:#141920;--mk-fg:#d8dce4;--mk-mut:#6f7987;--mk-line:rgba(255,255,255,.09);--mk-acc:#d4a73a;--mk-ok:#59d499;--mk-warn:#ffc533;--mk-bad:#ff6161;
+ width:100%;aspect-ratio:var(--ar,16/10);background:var(--mk-bg);color:var(--mk-fg);font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:clamp(8px,1.45cqw,15px);line-height:1.55;display:grid;overflow:hidden;box-sizing:border-box;position:relative;container-type:inline-size;text-align:left;font-weight:400;letter-spacing:0;font-style:normal}
+.mk *{box-sizing:border-box;margin:0;text-shadow:none}
+.mk .mk-top{grid-area:top;display:flex;align-items:center;gap:1em;padding:.7em 1.1em;border-bottom:1px solid var(--mk-line);color:var(--mk-mut);font-size:.9em;white-space:nowrap;overflow:hidden}
+.mk .mk-top b{color:var(--mk-fg);font-weight:500}
+.mk .mk-top i{width:.9em;height:.9em;border-radius:50%;background:var(--mk-line);flex:none}
+.mk .mk-top i.r{margin-left:auto}
+.mk aside{grid-area:side;border-right:1px solid var(--mk-line);padding:.9em 0;overflow:hidden}
+.mk aside small{display:block;padding:0 1.1em .5em;font-size:.75em;letter-spacing:.08em;color:var(--mk-mut)}
+.mk aside div{display:flex;align-items:center;gap:.7em;padding:.45em 1.1em;white-space:nowrap;overflow:hidden}
+.mk aside div em{font-style:normal;color:var(--mk-mut);margin-left:auto;font-size:.85em}
+.mk aside div.cur{background:var(--mk-bg2)}
+.mk s{width:.7em;height:.7em;border-radius:50%;border:2px solid var(--mk-mut);flex:none;text-decoration:none;display:inline-block;position:relative}
+.mk s.on{background:var(--mk-acc);border-color:var(--mk-acc)}
+.mk s.wait{border-color:var(--mk-warn);box-shadow:0 0 0 .25em rgba(255,197,51,.22)}
+.mk s.ok{background:var(--mk-ok);border-color:var(--mk-ok)}
+.mk s.bad{background:var(--mk-acc);border-color:var(--mk-acc)}
+.mk s.bad::after{content:"";position:absolute;inset:.12em;border-radius:50%;background:var(--mk-bad)}
+.mk main{grid-area:main;padding:1.1em 1.4em;overflow:hidden}
+.mk main p{white-space:nowrap}
+.mk main p.d{color:var(--mk-mut)}
+.mk .ok{color:var(--mk-ok)}.mk .warn{color:var(--mk-warn)}.mk .bad{color:var(--mk-bad)}.mk .acc{color:var(--mk-acc)}
+.mk footer{grid-area:foot;padding:.5em 1.1em;border-top:1px solid var(--mk-line);color:var(--mk-mut);font-size:.85em;white-space:nowrap;overflow:hidden}
+.mk-dash{grid-template:"top top" auto "side main" 1fr "foot foot" auto / 30% 1fr}
+.mk-phone{grid-template:"top" auto "side" auto "main" 1fr "keys" auto / 1fr;font-size:clamp(8px,3.8cqw,15px)}
+.mk-phone aside{border-right:0;border-bottom:1px solid var(--mk-line)}
+.mk-phone.term{grid-template:"top" auto "main" 1fr "keys" auto / 1fr}
+.mk .mk-keys{grid-area:keys;display:flex;gap:.4em;padding:.7em .9em;border-top:1px solid var(--mk-line);background:var(--mk-bg2)}
+.mk .mk-keys span{flex:1;text-align:center;padding:.5em 0;border-radius:.4em;background:var(--mk-bg);border:1px solid var(--mk-line);font-size:.85em}
+.mk-op{grid-template:"top" auto "main" 1fr / 1fr}
+.mk-op .mk-in{margin-top:.7em;padding-top:.7em;border-top:1px solid var(--mk-line)}
+.mk-op .mk-in span{color:var(--mk-mut)}
+.mk-board{grid-template:"top top top" auto "a b c" 1fr / 1fr 1fr 1fr}
+.mk-board section{padding:.9em 1.1em;border-right:1px solid var(--mk-line);overflow:hidden}
+.mk-board section:last-child{border-right:0}
+.mk-board section header{display:flex;align-items:center;gap:.6em;color:var(--mk-mut);margin-bottom:.6em;white-space:nowrap}
+.mk-board section p{white-space:nowrap}
+.mk-state{grid-template:"top" auto "side" 1fr / 1fr}
+.mk-state aside{border-right:0}
+.mk-state aside div{padding:.6em 1.1em}
+.mk-hexo{display:grid;place-items:center;gap:28px;color:var(--fg);padding:40px 0}
+.mk-hexo svg{width:min(260px,60%);aspect-ratio:200/220;fill:none;stroke:currentColor;stroke-width:1.2;filter:drop-shadow(0 0 40px var(--glow,rgba(255,255,255,.12)))}
+.mk-hexo p{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="mark" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7z"/></svg>HexoKit</a>
+  <nav class="links"><a href="#">Product</a><a href="#">Toolkit</a><a class="p" href="#">Docs</a><a class="p" href="#">Releases</a></nav>
+  <div class="right"><a class="btn" href="#">Read the docs</a><a class="btn" href="#">GitHub</a><a class="btn light" href="#install">Install</a><button class="theme" aria-label="Toggle theme" onclick="tt()">◐</button></div>
+</div></header>
+
+<main class="wrap"><div class="grid">
+  <p class="ann">v3.19.60 shipped today · the operator's console drops in from any tab <a href="#">Read the release</a></p>
+  <section class="hero">
+    <div>
+      <h1>Your tmux, in the browser and on your phone.</h1>
+      <p class="subline">Cockpit for the agent era.</p>
+      <div class="ctas"><a class="pill light" href="#install">Install now</a><a class="pill dark" href="#">Read the docs</a></div>
+    </div>
+    <div class="hex"><svg viewBox="0 0 200 220" fill="none"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".9"/><stop offset="1" stop-color="currentColor" stop-opacity=".1"/></linearGradient></defs><path d="M100 10l86 50v100l-86 50-86-50V60z" stroke="url(#g)" stroke-width="2"/><path d="M100 10l86 50v100l-86 50-86-50V60z" fill="var(--bg)"/><path d="M100 210V110M14 60l86 50 86-50" stroke="url(#g)" stroke-width="1.5"/></svg></div>
+    <div class="uses">For every pane<br>On every device<br>Any agent, untouched</div>
+  </section>
+  <div class="logos"><div>Claude Code</div><div>Codex</div><div>Gemini CLI</div><div>Copilot CLI</div><div>Kimi Code</div><div>OpenCode</div><div>Antigravity</div></div>
+
+  <section class="trip">
+    <div><div class="lbl">01 · PLAN</div><h3>A plan before any code.</h3><p>fab-kit puts an intake stage in front of every change. The agent scores each assumption. Four questions per decision: how clear was the signal, how reversible is it, can the agent know this, how many readings are there. The change starts at 5.0 and every weak decision costs points. Under 3.0 the gate closes and the pipeline tells you what to clarify.</p>
+      <div class="frame"><div class="bar"><i></i><i></i><i></i>fab score</div><pre class="mono">$ fab score --check-gate 7ajq
+confidence 2.6 / 5.0 · gate 3.0
+<span class="bad">blocked</span> — 1 unresolved
+<span class="c">run /fab-clarify</span>
+
+$ fab score --check-gate 7ajq
+confidence 3.4 / 5.0 · gate 3.0 · <span class="ok">pass</span></pre></div></div>
+    <div><div class="lbl">02 · BUILD</div><h3>One command per parallel agent.</h3><p>rk riff gives an agent its own git worktree and tmux window. -N 3 starts three. The operator watches the fleet and pings your phone when it needs you.</p>
+      <div class="frame"><div class="bar"><i></i><i></i><i></i>rk riff</div><pre class="mono">$ rk riff --skill /fab-fff -N 3
+<span class="c">→ worktree ../repo.worktrees/swift-fox</span>
+<span class="c">→ worktree ../repo.worktrees/calm-heron</span>
+<span class="c">→ worktree ../repo.worktrees/amber-tern</span>
+● building  ● building  ◌ waiting on you
+$ rk operator</pre></div></div>
+    <div><div class="lbl">03 · SHIP</div><h3>Review in a fresh sub-agent, then a PR.</h3><p>Review loops back to apply up to three times. Ship opens the draft PR. Review-PR triages the bot's comments. What the change learned lands in docs/memory, in git.</p>
+      <div class="frame"><div class="bar"><i></i><i></i><i></i>.status.yaml</div><pre class="mono">intake     <span class="ok">done</span>
+apply      <span class="ok">done</span>
+review     <span class="ok">done</span>  <span class="c">2 cycles</span>
+hydrate    <span class="ok">done</span>  <span class="c">docs/memory +3</span>
+ship       <span class="ok">done</span>  <span class="c">PR #967 draft</span>
+review-pr  <span class="ok">active</span></pre></div></div>
+  </section>
+
+  <section class="sec">
+    <h2>Watch a whole fleet, from anywhere.</h2>
+    <div class="side"><b>Every session and pane in a sidebar.</b> Pin several into a board. One dot per window says working, waiting or idle. Open the same board on your phone.<a class="more" href="#">Boards and status dots</a></div>
+    <div class="frames"><figure class="frame" style="margin:0"><div class="bar"><i></i><i></i><i></i>riff-amber-tern · OPERATOR</div><div class="mk mk-op" style="--ar:1600/726;"><div class="mk-top"><b>⌁ OPERATOR</b><span>runKit · idle 56m</span><i class="r"></i></div><main><p class="d">Ran 1 shell command</p><p>All green. Merging.</p><p>Merged. PR #865.</p><p class="d">0 tracked · loop stopped</p><p>Start C8 and C9?</p><p class="mk-in">› <span>start C8 and C9</span><b class="acc">▌</b></p></main></div></figure><figure class="frame" style="margin:0"><div class="bar"><i></i><i></i><i></i>sidebar · status</div><div class="mk mk-state" style="--ar:1000/625;"><div class="mk-top"><b>SESSIONS</b><span>one dot per window</span><i class="r"></i></div><aside><div><s class="on"></s>swift-fox<em>working</em></div><div><s class="wait"></s>calm-heron<em>waiting on you</em></div><div><s></s>amber-tern<em>idle 43s</em></div><div><s class="bad"></s>flaky-tz<em>review failed</em></div></aside></div></figure></div>
+  </section>
+
+  <section class="sec">
+    <h2>Give the agent a screen.</h2>
+    <div class="side"><b>rk gui on puts a desktop in a tile</b> beside your terminals. The agent opens apps, clicks, types and takes screenshots. You watch from the browser or your phone. Off by default.<a class="more" href="#">The GUI guide</a></div>
+    <div class="frames one"><div class="frame"><div class="bar"><i></i><i></i><i></i>⌘4 gui · IceWM · 1920×1080</div><pre class="mono">$ rk gui on
+gui: on (Xtigervnc, :10, 1920x1080 fixed, 0 viewers, icewm-session)
+$ rk gui exec --detach google-chrome --app=http://localhost:3000
+$ rk gui shot --json
+{"ok":true,"path":"…/shot-1132.png","display":":10"}
+$ rk gui click 812 344 &amp;&amp; rk gui type "hexokit.com/docs" &amp;&amp; rk gui key Return
+$ rk gui windows
+0x1e00007  chrome   1200×760
+0x1a00003  xterm     380×240</pre></div></div>
+  </section>
+
+  <section class="sec">
+    <h2>From your phone, over your own network.</h2>
+    <div class="side"><b>Serve it over Tailscale.</b> Same sessions, same boards, same panes. A key bar for tab, ctrl and arrows. Nothing leaves your tailnet.<a class="more" href="#">HTTPS over Tailscale</a></div>
+    <div class="frames"><div class="frame"><div class="bar"><i></i><i></i><i></i>terminal</div><pre class="mono">$ sudo tailscale set --operator=$USER
+$ tailscale serve --bg http://localhost:3000
+<span class="ok">→ https://dev-ws.tail1a2b.ts.net</span>
+$ rk notify "review failed on 7ajq" --title fab</pre></div><div class="phones"><figure><div class="mk mk-phone" style="--ar:800/1739;"><div class="mk-top"><b>HexoKit</b><span>dev-ws</span><i class="r"></i></div><aside><small>SESSIONS · runKit</small><div class="cur"><s class="on"></s>swift-fox<em>building</em></div><div><s class="wait"></s>calm-heron<em>waiting on you</em></div><div><s class="on"></s>amber-tern<em>building</em></div><div><s></s>dev<em>just dev</em></div><div><s></s>htop</div></aside><main><p class="d">tap a pane</p><p class="d">you are in the shell you left at your desk</p></main><div class="mk-keys"><span>tab</span><span>ctrl</span><span>esc</span><span>↑</span><span>↓</span><span>⌘K</span></div></div></figure><figure><div class="mk mk-phone term" style="--ar:800/1739;"><div class="mk-top"><b>calm-heron</b><span>agt waiting</span><i class="r"></i></div><main><p>$ fab score --check-gate 7ajq</p><p>confidence 3.4 / 5.0</p><p>gate 3.0 · <b class="ok">pass</b></p><p class="d">&nbsp;</p><p class="d">? proceed to apply</p><p class="acc">› y▌</p></main><div class="mk-keys"><span>tab</span><span>ctrl</span><span>esc</span><span>↑</span><span>↓</span><span>⌘K</span></div></div></figure></div></div>
+  </section>
+
+  <div class="facts">
+    <div><b>0 databases.</b>State is read from tmux and the filesystem on every request.<small>THE MENTAL MODEL</small></div>
+    <div><b>0 protocols spoken.</b>A pane is just a pane. HexoKit never wraps the agent.<small>WHY IT OUTLIVES THE AGENT</small></div>
+    <div><b>1 line to install.</b>tmux 3.4 or newer is the only prerequisite. MIT, all seven repos.<small>INSTALL</small></div>
+  </div>
+
+  <div class="tools">
+    <div><b>fab-kit</b><span>A plan before any agent writes code.</span><code>/fab-new</code></div>
+    <div><b>wt</b><span>Throwaway git worktrees, one per change.</span><code>wt create</code></div>
+    <div><b>idea</b><span>Catch an idea without breaking flow.</span><code>idea add</code></div>
+    <div><b>tu</b><span>What your AI coding sessions cost.</span><code>tu --watch</code></div>
+    <div><b>hop</b><span>Jump to any of your repos.</span><code>hop --all pull</code></div>
+    <div><b>shll</b><span>Installs and updates the whole set.</span><code>shll setup agent</code></div>
+  </div>
+
+  <section class="close" id="install">
+    <h2>One line, then you are in.</h2>
+    <pre class="mono">curl -fsSL hexokit.com/install | sh</pre>
+    <div class="ctas"><a class="pill light" href="#">Install now</a><a class="pill dark" href="#">Read the docs</a></div>
+  </section>
+
+  <footer><div class="cols">
+    <div><a class="mark" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7z"/></svg>HexoKit</a></div>
+    <div><h5>Product</h5><a href="#">Docs</a><a href="#">Install</a><a href="#">Boards</a><a href="#">GUI</a><a href="#">Desktop app</a></div>
+    <div><h5>Toolkit</h5><a href="#">fab-kit</a><a href="#">wt</a><a href="#">idea</a><a href="#">tu</a><a href="#">hop</a><a href="#">shll</a></div>
+    <div><h5>Community</h5><a href="#">GitHub</a><a href="#">Discord</a><a href="#">Releases</a></div>
+    <div><h5>Machines</h5><a href="#">versions.json</a><a href="#">llms.txt</a><a href="#">MCP</a></div>
+  </div></footer>
+</div></main>
+<script>function tt(){var r=document.documentElement,d=r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.dataset.theme=d==='dark'?'light':'dark'}</script>
+</body>
+</html>
